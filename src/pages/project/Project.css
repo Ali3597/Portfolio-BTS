@@ -1,6 +1,7 @@
 .project {
-  height: 150vh;
-
+  min-height: 25vh;
+  transition: all 1s ease;
+  background-color: pink;
   width: 100%;
   display: flex;
   padding-left: 11%;
@@ -20,21 +21,18 @@
 }
 
 .project-list {
-  height: 25vh;
-  border: 1px solid;
+  height: fit-content;
+
   display: flex;
 }
-.project-list {
-  height: 25vh;
-  border: 1px solid;
-  display: flex;
-}
+
 .project-list-left {
   text-align: left;
   width: 70%;
 }
 .project-list-right {
   width: 30%;
+  overflow: hidden;
 }
 .project-filter {
   text-align: left;

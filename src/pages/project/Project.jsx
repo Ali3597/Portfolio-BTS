@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import "./Project.css";
 import { ProjectFilter } from "./ProjectsFilter";
-import { ProjectsList } from "./ProjectsList";
-const documents = [
+import { ProjectList } from "./ProjectList";
+import { motion ,AnimatePresence} from "framer-motion";
+
+const projects = [
   {
     type: "PHP",
     title: "Calcenter",
@@ -40,41 +42,51 @@ const documents = [
 export function Project() {
   const [currentFilter, setCurrentFilter] = useState("All");
   const [filters, setFilters] = useState([]);
+  const [filteredProjects, setFilteredProjects] = useState([])
   const changeFilter = (newFilter) => {
     setCurrentFilter(newFilter);
   };
   useEffect(() => {
-    if (documents) {
+    if (projects) {
+      // set filters
       let results = ["All"];
-      documents.map((project) => {
+      projects.map((project) => {
         if (!results.includes(project.type)) {
           results.push(project.type);
         }
       });
       setFilters(results);
+
       
     }
-  }, [documents]);
-  const projects = documents
-    ? documents.filter((document) => {
+  }, [projects]);
+   useEffect(() => {
+    if (projects) {
+      let pass = projects.filter((project) => {
         switch (currentFilter) {
           case "All":
             return true;
           default:
-            return document.type === currentFilter;
-
+            return project.type === currentFilter;
         }
       })
-    : null;
+      setFilteredProjects(pass)
+    }
+  }, [currentFilter]);
+  
   return (
-    <div className="project">
+    <div style={{ height: `${filteredProjects.length*21}vh` }} className="project">
       <div className="left-project">
         <h1>Project</h1>
       </div>
       <div className="right-project">
         <ProjectFilter currentFilter={currentFilter}
           changeFilter={changeFilter} filters={filters} />
-        <ProjectsList projects={projects} />
+        <motion.div layout>
+          <AnimatePresence>
+        {filteredProjects && filteredProjects.map((p,index)=>(<ProjectList key={index} project={p} />) )}
+        </AnimatePresence>
+        </motion.div>
       </div>
     </div>
   );
