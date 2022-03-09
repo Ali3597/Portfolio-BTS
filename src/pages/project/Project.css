@@ -1,7 +1,6 @@
 .project {
-  min-height: 25vh;
   transition: all 1s ease;
-  background-color: pink;
+
   width: 100%;
   display: flex;
   padding-left: 11%;

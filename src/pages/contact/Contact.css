@@ -1,7 +1,43 @@
 .contact {
   width: 100%;
-  background-color: aqua;
-  height: 150vh;
+
+  height: fit-content;
   padding-left: 11%;
   padding-right: 11%;
+  display: flex;
+  margin-bottom: 5%;
+}
+
+.contact-left {
+  width: 33%;
+}
+.contact-right {
+  display: flex;
+  justify-content: center;
+  width: 67%;
+}
+.contact-right form {
+  margin-top: 3%;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.contact-right form input {
+  margin-bottom: 5%;
+  height: 8vh;
+  border-radius: 5px;
+}
+
+.contact-right form textarea {
+  margin-bottom: 5%;
+  height: 25vh;
+}
+
+.contact-right button {
+  border-radius: 5px;
+  width: 15%;
+  height: 4vh;
+  background-color: brown;
+  color: white;
 }
