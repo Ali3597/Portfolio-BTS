@@ -1,0 +1,79 @@
+.experience {
+  height: fit-content;
+
+  display: flex;
+  padding-left: 11%;
+  padding-right: 11%;
+  width: 100%;
+}
+
+.left-expe {
+  width: 33%;
+}
+
+.right-expe {
+  width: 60%;
+}
+.right-expe > div {
+  width: 100%;
+  display: flex;
+}
+
+.bord {
+  width: 10%;
+
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 1;
+  align-items: center;
+}
+
+.dot {
+  height: 25px;
+  width: 25px;
+
+  border: 1px solid black;
+  border-radius: 50%;
+  display: inline-block;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.trait {
+  flex: 1;
+
+  display: flex;
+  width: 100%;
+}
+
+.trait div {
+  width: 50%;
+}
+.trait.trait-bord :nth-child(1) {
+  border-right: 1px solid black;
+}
+.trait.trait-bord :nth-child(2) {
+  border-left: 1px solid black;
+}
+.detail-expe {
+  display: flex;
+  margin-top: 5%;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  height: fit-content;
+}
+.card-expe {
+  border: 1px solid;
+  height: 90%;
+  width: 90%;
+  box-shadow: 0 2px 4px 0 rgb(0 0 0 / 20%);
+
+  transition: all 0.2s ease-out;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+}
+
+.card-expe:hover {
+  box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
+}
