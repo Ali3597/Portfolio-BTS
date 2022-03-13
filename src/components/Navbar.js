@@ -1,7 +1,9 @@
 import "./Navbar.css";
 import { FaPalette } from "react-icons/fa";
+import { useThemeContext } from "../hooks/useThemeContext";
 
 export function Navbar({ sticky }) {
+  const { setTheme } = useThemeContext();
   return (
     <nav className="navbar">
       <div className="container">
@@ -16,7 +18,7 @@ export function Navbar({ sticky }) {
             <li>Resume</li>
             <li>Contact</li>
             <li>
-              <FaPalette />
+              <FaPalette onClick={setTheme} />
             </li>
           </ul>
         </div>

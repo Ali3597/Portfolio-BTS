@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./Project.css";
+import { useThemeContext } from "../../hooks/useThemeContext";
 import { ProjectFilter } from "./ProjectsFilter";
 import { ProjectList } from "./ProjectList";
 import { motion ,AnimatePresence} from "framer-motion";
@@ -40,6 +41,7 @@ const projects = [
 ];
 
 export function Project() {
+  const {theme} = useThemeContext()
   const [currentFilter, setCurrentFilter] = useState("All");
   const [filters, setFilters] = useState([]);
   const [filteredProjects, setFilteredProjects] = useState([])
@@ -75,7 +77,7 @@ export function Project() {
   }, [currentFilter]);
   
   return (
-    <div style={{ height: `${filteredProjects.length*21}vh` }} className="project">
+    <div style={{ height: `${filteredProjects.length*21}vh`,backgroundColor: theme.backgroundOdd }}  className="project">
       <div className="left-project">
         <h1>Project</h1>
       </div>

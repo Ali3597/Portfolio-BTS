@@ -1,0 +1,10 @@
+.veille {
+  height: fit-content;
+  background-color: #eaf2fa;
+  padding-left: 11%;
+  padding-right: 11%;
+  padding-top: 3%;
+  padding-bottom: 3%;
+  display: flex;
+  flex-direction: column;
+}

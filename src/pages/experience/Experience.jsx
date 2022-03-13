@@ -1,5 +1,5 @@
 import "./Experience.css";
-
+import { useThemeContext } from "../../hooks/useThemeContext";
 const experiences = [
   {
     start: "March 2020",
@@ -45,8 +45,9 @@ pour la base de donnée.
 ];
 
 export function Experience() {
+  const {theme} = useThemeContext()
   return (
-    <div className="experience">
+    <div style={{ backgroundColor: theme.backgroundOdd }} className="experience">
       <div className="left-expe">
         <h1>Experience</h1>
       </div>
@@ -59,7 +60,7 @@ export function Experience() {
                   <div> </div>
                   <div> </div>
                 </div>
-                <div class="dot"> </div>
+                <div className="dot"> </div>
                 <div
                   className={
                     index == experiences.length - 1

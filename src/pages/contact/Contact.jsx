@@ -3,8 +3,9 @@ import { Home } from "../home/Home";
 import { Experience } from "../experience/Experience";
 import { Project } from "../project/Project";
 import { useState } from "react";
-
+import { useThemeContext } from "../../hooks/useThemeContext";
 export function Contact() {
+  const {theme} = useThemeContext()
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [message, setMessage] = useState("")
@@ -13,7 +14,7 @@ export function Contact() {
     console.log(name,email,message)
   }
   return (
-    <div className="contact">
+    <div style={{ backgroundColor: theme.backgroundEven }}className="contact">
       <div className="contact-left">
         <h1>Contact</h1>
       </div>
