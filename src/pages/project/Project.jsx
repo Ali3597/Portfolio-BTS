@@ -10,32 +10,32 @@ const projects = [
     type: "PHP",
     title: "Calcenter",
     project: "",
-    details: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
-    link: "google.com",
+    details: " Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
+    github: "https://twitter.com/",
     photo: "https://img.freepik.com/photos-gratuite/gros-plan-belle-fleur-daisy-oxeye_181624-11106.jpg?size=626&ext=jpg",
   },
   {
     type: "PHP",
     title: "site web symfony",
     project: null,
-    details: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
-    link: "google.com",
+    details: " Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
+    github: "google.com",
     photo: "https://img.freepik.com/photos-gratuite/gros-plan-belle-fleur-daisy-oxeye_181624-11106.jpg?size=626&ext=jpg",
   },
   {
     type: "Javascript",
     title: "Echec en python ",
     project: "google.com",
-    details: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
-    link: "google.com",
+    details: " Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
+    github: "google.com",
     photo: "https://img.freepik.com/photos-gratuite/gros-plan-belle-fleur-daisy-oxeye_181624-11106.jpg?size=626&ext=jpg",
   },
   {
     type: "Python",
     title: "Spotify like",
     project: null,
-    details: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
-    link: "google.com",
+    details: " Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
+    github: "google.com",
     photo: "https://img.freepik.com/photos-gratuite/gros-plan-belle-fleur-daisy-oxeye_181624-11106.jpg?size=626&ext=jpg",
   },
 ];
@@ -77,9 +77,9 @@ export function Project() {
   }, [currentFilter]);
   
   return (
-    <div id="projects" style={{ height: `${filteredProjects.length*21}vh`,backgroundColor: theme.backgroundOdd }}  className="project">
+    <div id="projects" style={{ height: `${filteredProjects.length*40}vh`,backgroundColor: theme.backgroundOdd }}  className="project">
       <div className="left-project">
-        <h1>Project</h1>
+        <h1>Projects</h1>
       </div>
       <div className="right-project">
         <ProjectFilter currentFilter={currentFilter}

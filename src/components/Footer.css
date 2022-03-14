@@ -2,5 +2,17 @@ footer {
   height: 15vh;
   display: flex;
   justify-content: center;
+  padding-left: 11%;
+  padding-right: 11%;
   align-items: center;
+}
+footer p {
+  width: 55%;
+  float: right !important;
+  text-align: end;
+}
+
+footer a {
+  width: 45%;
+  text-align: end;
 }

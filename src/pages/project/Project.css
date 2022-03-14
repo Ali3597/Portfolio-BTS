@@ -5,12 +5,17 @@
   display: flex;
   padding-left: 11%;
   padding-right: 11%;
+  padding-top: 6%;
 }
 .left-project {
   width: 33%;
   height: 100%;
+  text-align: left;
 }
-
+.left-project h1 {
+  margin-top: 5%;
+  font-size: 40px;
+}
 .right-project {
   width: 67%;
   height: 100%;
@@ -21,7 +26,7 @@
 
 .project-list {
   height: fit-content;
-
+  margin-top: 2%;
   display: flex;
 }
 
@@ -29,10 +34,55 @@
   text-align: left;
   width: 70%;
 }
+
+.project-list-left h1 {
+  font-size: 17px;
+}
+.project-list-left p {
+  font-size: 14px;
+}
 .project-list-right {
   width: 30%;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
 }
 .project-filter {
   text-align: left;
+  margin-bottom: 2%;
+}
+.project-filter button {
+  background-color: #795548;
+  color: white;
+  transition: all ease 0.2s;
+  padding: 1%;
+  cursor: pointer;
+  border: none;
+}
+.project button.active {
+  background-color: #593f35;
+}
+
+.project button:hover {
+  background-color: #a57868;
+}
+.project button.active:hover {
+  background-color: #593f35;
+}
+.project-filter button:first-child {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+.project-filter button:last-child {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.project-left-links {
+  display: flex;
+}
+
+.project-left-links a {
+  margin-right: 1%;
 }

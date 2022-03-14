@@ -9,9 +9,9 @@ export function Footer() {
     <footer
       style={{ backgroundColor: theme.backgroundOdd, color: theme.basicColor }}
     >
-      © Ali Saleh
+      <p> © Ali Saleh </p>
       <Link activeClass="active" to="home" offset={-80} smooth={true}>
-        <FaChevronUp cursor={"pointer"} size={50} />
+        <FaChevronUp cursor={"pointer"} size={30} />
       </Link>
     </footer>
   );
