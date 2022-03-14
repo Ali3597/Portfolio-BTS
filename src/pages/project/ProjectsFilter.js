@@ -1,4 +1,4 @@
-export function ProjectFilter({ currentFilter, changeFilter, filters }) {
+export function ProjectFilter({ currentFilter, changeFilter, filters, theme }) {
   const handleClick = (newFilter) => {
     console.log(newFilter);
     changeFilter(newFilter);
@@ -7,6 +7,7 @@ export function ProjectFilter({ currentFilter, changeFilter, filters }) {
     <div className="project-filter">
       {filters.map((f) => (
         <button
+          style={{ color: theme.backgroundOdd }}
           className={currentFilter == f ? "active" : ""}
           key={f}
           onClick={() => handleClick(f)}

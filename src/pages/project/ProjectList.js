@@ -4,7 +4,7 @@ import { Link } from "../../components/IconLink";
 import { FaLink } from "react-icons/fa";
 import { AiFillGithub } from "react-icons/ai";
 
-export function ProjectList({ project }) {
+export function ProjectList({ project, theme }) {
   return (
     <motion.div
       layout
@@ -14,9 +14,10 @@ export function ProjectList({ project }) {
       transition={{ duration: 0.7 }}
       className="project-list"
     >
-      <div className="project-list-left">
+      <div style={{ color: theme.basicColor }} className="project-list-left">
         <h1>{project.title}</h1>
         <p>{project.details}</p>
+
         <div className="project-left-links">
           {project.github && (
             <Link

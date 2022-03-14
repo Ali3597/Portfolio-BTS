@@ -11,11 +11,11 @@ export function Contact() {
     console.log(name,email,message)
   }
   return (
-    <div style={{ backgroundColor: theme.backgroundEven }} className="contact">
-      <div className="contact-left">
+    <div style={{ backgroundColor: theme.backgroundEven }} className="block">
+      <div className="contact-left left">
         <h1 style={{ color: theme.greyTitleColor }}>Contact</h1>
       </div>
-      <div className="contact-right">
+      <div className="contact-right right">
         <form onSubmit={handleSubmit}>
           <input style={{ backgroundColor: theme.inputBackground }} value={name} onChange={(e) => setName(e.target.value)} required type="text" placeholder="Name" />
           <input style={{ backgroundColor: theme.inputBackground }} value={email} onChange={(e) => setEmail(e.target.value)}  required type="email" placeholder="Email" />

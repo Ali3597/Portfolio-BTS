@@ -6,3 +6,27 @@
   margin: 0;
   padding: 0;
 }
+
+.block {
+  width: 100%;
+  height: fit-content;
+  padding-left: 11%;
+  padding-right: 11%;
+  display: flex;
+  padding-top: 6%;
+  padding-bottom: 5%;
+}
+
+.left {
+  width: 33%;
+}
+.left h1 {
+  margin-right: 50%;
+  margin-top: 5%;
+  font-size: 40px;
+}
+.right {
+  display: flex;
+  flex-direction: column;
+  width: 67%;
+}

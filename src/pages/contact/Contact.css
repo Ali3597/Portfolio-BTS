@@ -1,27 +1,3 @@
-.contact {
-  width: 100%;
-
-  height: fit-content;
-  padding-left: 11%;
-  padding-right: 11%;
-  display: flex;
-  padding-top: 6%;
-  padding-bottom: 5%;
-}
-
-.contact-left {
-  width: 33%;
-}
-.contact-left h1 {
-  margin-right: 50%;
-  margin-top: 5%;
-  font-size: 40px;
-}
-.contact-right {
-  display: flex;
-
-  width: 67%;
-}
 .contact-right form {
   margin-top: 3%;
   display: flex;

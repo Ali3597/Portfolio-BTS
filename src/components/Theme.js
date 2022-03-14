@@ -5,6 +5,7 @@ export const DarkTheme = {
   greyTitleColor: "#98a6ad",
   cardBackground: "#343a40",
   inputBackground: "#44475a",
+  date: "#FFFFFFCC",
 };
 
 export const LightTheme = {
@@ -14,4 +15,5 @@ export const LightTheme = {
   greyTitleColor: "#313131",
   cardBackground: "white",
   inputBackground: "white",
+  date: "#0000008A",
 };

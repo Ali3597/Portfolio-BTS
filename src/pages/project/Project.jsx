@@ -10,7 +10,7 @@ const projects = [
     type: "PHP",
     title: "Calcenter",
     project: "",
-    details: " Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
+    details: " Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of yyy and scrambled it to make a yyy specimen book",
     github: "https://twitter.com/",
     photo: "https://img.freepik.com/photos-gratuite/gros-plan-belle-fleur-daisy-oxeye_181624-11106.jpg?size=626&ext=jpg",
   },
@@ -21,6 +21,7 @@ const projects = [
     details: " Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
     github: "google.com",
     photo: "https://img.freepik.com/photos-gratuite/gros-plan-belle-fleur-daisy-oxeye_181624-11106.jpg?size=626&ext=jpg",
+    
   },
   {
     type: "Javascript",
@@ -59,7 +60,6 @@ export function Project() {
       });
       setFilters(results);
 
-      
     }
   }, [projects]);
    useEffect(() => {
@@ -77,16 +77,16 @@ export function Project() {
   }, [currentFilter]);
   
   return (
-    <div id="projects" style={{ height: `${filteredProjects.length*40}vh`,backgroundColor: theme.backgroundOdd }}  className="project">
-      <div className="left-project">
-        <h1>Projects</h1>
+    <div id="projects" style={{ height: `${filteredProjects.length*38}vh`,backgroundColor: theme.backgroundOdd }}  className="block">
+      <div className="left-project left">
+        <h1 style={{ color: theme.greyTitleColor }}>Projects</h1>
       </div>
-      <div className="right-project">
+      <div className="right-project right">
         <ProjectFilter currentFilter={currentFilter}
-          changeFilter={changeFilter} filters={filters} />
+          changeFilter={changeFilter} filters={filters} theme={theme} />
         <motion.div layout>
           <AnimatePresence>
-        {filteredProjects && filteredProjects.map((p,index)=>(<ProjectList key={index} project={p} />) )}
+        {filteredProjects && filteredProjects.map((p,index)=>(<ProjectList key={index} project={p} theme={theme} />) )}
         </AnimatePresence>
         </motion.div>
       </div>
