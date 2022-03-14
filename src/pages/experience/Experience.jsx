@@ -49,7 +49,7 @@ export function Experience() {
   return (
     <div id="experience" style={{ backgroundColor: theme.backgroundOdd }} className="experience">
       <div className="left-expe">
-        <h1>Experience</h1>
+        <h1 style={{ color: theme.greyTitleColor }}>Experience</h1>
       </div>
       <div className="right-expe">
         {experiences &&
@@ -73,7 +73,7 @@ export function Experience() {
                 </div>
               </div>
               <div className="detail-expe">
-                <div className="card-expe">
+                <div style={{ backgroundColor: theme.cardBackground }} className="card-expe">
                   <h1>{experience.title}</h1>
                   <h5>{experience.start}-{experience.end}.{experience.location}</h5>
                   <ul>

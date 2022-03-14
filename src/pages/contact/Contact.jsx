@@ -1,7 +1,4 @@
 import "./Contact.css";
-import { Home } from "../home/Home";
-import { Experience } from "../experience/Experience";
-import { Project } from "../project/Project";
 import { useState } from "react";
 import { useThemeContext } from "../../hooks/useThemeContext";
 export function Contact() {
@@ -14,15 +11,15 @@ export function Contact() {
     console.log(name,email,message)
   }
   return (
-    <div style={{ backgroundColor: theme.backgroundEven }}className="contact">
+    <div style={{ backgroundColor: theme.backgroundEven }} className="contact">
       <div className="contact-left">
-        <h1>Contact</h1>
+        <h1 style={{ color: theme.greyTitleColor }}>Contact</h1>
       </div>
       <div className="contact-right">
         <form onSubmit={handleSubmit}>
-          <input value={name} onChange={(e) => setName(e.target.value)} required type="text" placeholder="name" />
-          <input value={email} onChange={(e) => setEmail(e.target.value)}  required type="email" placeholder="Email" />
-          <textarea value={message} onChange={(e) => setMessage(e.target.value)}  required placeholder="Message" />
+          <input style={{ backgroundColor: theme.inputBackground }} value={name} onChange={(e) => setName(e.target.value)} required type="text" placeholder="Name" />
+          <input style={{ backgroundColor: theme.inputBackground }} value={email} onChange={(e) => setEmail(e.target.value)}  required type="email" placeholder="Email" />
+          <textarea style={{ backgroundColor: theme.inputBackground }} value={message} onChange={(e) => setMessage(e.target.value)}  required placeholder="Message" />
           <button>Envoyer</button>
         </form>
       </div>

@@ -5,39 +5,75 @@
   padding-left: 11%;
   padding-right: 11%;
   display: flex;
+  padding-top: 6%;
   padding-bottom: 5%;
 }
 
 .contact-left {
   width: 33%;
 }
+.contact-left h1 {
+  margin-right: 50%;
+  margin-top: 5%;
+  font-size: 40px;
+}
 .contact-right {
   display: flex;
-  justify-content: center;
+
   width: 67%;
 }
 .contact-right form {
   margin-top: 3%;
   display: flex;
   flex-direction: column;
-  width: 50%;
+  width: 90%;
+  margin-left: 3%;
 }
 
 .contact-right form input {
   margin-bottom: 5%;
-  height: 8vh;
+  height: 6vh;
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #ced4da;
+}
+.contact-right form input::placeholder {
+  padding-left: 3%;
+  font-size: 17px;
+}
+.contact-right form textarea::placeholder {
+  padding-left: 3%;
+  padding-top: 1%;
+  font-size: 17px;
+}
+.contact-right form input:focus {
+  outline: 5px solid #795548;
   border-radius: 5px;
 }
 
 .contact-right form textarea {
-  margin-bottom: 5%;
-  height: 25vh;
+  margin-bottom: 3%;
+  height: 20vh;
+  border: 1px solid #ced4da;
+}
+.contact-right form textarea:focus {
+  outline: 5px solid #795548;
+  border-radius: 5px;
 }
 
 .contact-right button {
   border-radius: 5px;
   width: 15%;
   height: 4vh;
-  background-color: brown;
+  background-color: transparent;
+  border: 1px solid #795548;
+  cursor: pointer;
+  transition: all ease 0.2s;
+  color: #795548;
+}
+
+.contact-right button:hover {
+  background-color: #795548;
+
   color: white;
 }

@@ -16,20 +16,22 @@ export function Home() {
         <div>
           <img src={identite} alt="me" width="80%" height="80%" />
         </div>
-        <h1>Ali SAleh</h1>
-        <h3>Etudient en informatique</h3>
-        <h4>EPSI Bordeaux</h4>
-        <h5>BTS SIO option SLAM</h5>
+        <h1 style={{ color: theme.basicColor }}>Ali SAleh</h1>
+        <h3 style={{ color: theme.greyTitleColor }}>
+          Etudient en informatique
+        </h3>
+        <h4 style={{ color: theme.greyTitleColor }}>EPSI Bordeaux</h4>
+        <h5 style={{ color: theme.greyTitleColor }}>BTS SIO option SLAM</h5>
       </div>
       <div className="right-home">
-        <h1>Biographie</h1>
-        <p>
+        <h1 style={{ color: theme.greyTitleColor }}>Biographie</h1>
+        <p style={{ color: theme.basicColor }}>
           Lorem Ipsum is simply dummy text of the printing and typesetting
           industry. Lorem Ipsum has been the industry's standard dummy text ever
           since the 1500s, when an unknown printer took a galley of type and
           scrambled it to make a type specimen book.
         </p>
-        <p>
+        <p style={{ color: theme.basicColor }}>
           It has survived not only five centuries, but also the leap into
           electronic typesetting, remaining essentially unchanged. It was
           popularised in the 1960s with the release of Letraset sheets
@@ -37,15 +39,15 @@ export function Home() {
           publishing software like Aldus PageMaker including versions of Lorem
           Ipsum.
         </p>
-        <p>
+        <p style={{ color: theme.basicColor }}>
           Contrary to popular belief, Lorem Ipsum is not simply random text. It
           has roots in a piece of classical Latin literature from 45 BC, making
           it over 2000 years old.
         </p>
         <div className="interest">
           <div>
-            <h3>Interest</h3>
-            <ul>
+            <h3 style={{ color: theme.greyTitleColor }}>Interest</h3>
+            <ul style={{ color: theme.basicColor }}>
               <li>Compentence 1</li>
               <li>Compentence 2</li>
               <li>Compentence 3</li>
@@ -53,8 +55,8 @@ export function Home() {
             </ul>
           </div>
           <div>
-            <h3>Education</h3>
-            <ul>
+            <h3 style={{ color: theme.greyTitleColor }}>Education</h3>
+            <ul style={{ color: theme.basicColor }}>
               <li>
                 <FaGraduationCap />
                 Etudes 1

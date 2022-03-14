@@ -6,22 +6,22 @@ import { FaHtml5 } from "react-icons/fa";
 import { useThemeContext } from '../../hooks/useThemeContext';
 const skills = [
   {
-    svg: <FaHtml5 size={80} color={"brown"} />,
+    svg: <FaHtml5 size={80} color={"#795548"} />,
     title: "Html/css",
     
     },
      {
-    svg: <FaNodeJs size={80} color={"brown"} />,
+    svg: <FaNodeJs size={80} color={"#795548"} />,
     title: "Javascript",
     details:"Node.js/Express,React/React Native"
     },
     {
-    svg: <FaPhp size={80} color={"brown"} />,
+    svg: <FaPhp size={80} color={"#795548"} />,
     title: "Php",
     details:"Symfony"
     },
     {
-    svg: <FaDatabase  size={80} color={"brown"}/>,
+    svg: <FaDatabase  size={80} color={"#795548"}/>,
     title: "Databases",
     details:"MySQL,SQL Server,MongoDB"
   },
@@ -33,13 +33,13 @@ const skills = [
 export function Skills() {
     const {theme} = useThemeContext()
     return <div id="skills" style={{ backgroundColor: theme.backgroundEven }} className="skills">
-        <h1>Skills</h1>
+        <h1 style={{ color: theme.greyTitleColor }}>Skills</h1>
         <div  className="skills-elements">
             {skills.map((skill,index) => (
                 <div key={index} className="skill">
                     {skill.svg}
-                    <h2> {skill.title}</h2>
-                    <p>{skill.details}</p>
+                    <h2 style={{ color: theme.basicColor }}> {skill.title}</h2>
+                    <p style={{ color: theme.basicColor }}>{skill.details}</p>
                 </div>
             ))}
            
