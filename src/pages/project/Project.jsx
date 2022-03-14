@@ -77,7 +77,7 @@ export function Project() {
   }, [currentFilter]);
   
   return (
-    <div style={{ height: `${filteredProjects.length*21}vh`,backgroundColor: theme.backgroundOdd }}  className="project">
+    <div id="projects" style={{ height: `${filteredProjects.length*21}vh`,backgroundColor: theme.backgroundOdd }}  className="project">
       <div className="left-project">
         <h1>Project</h1>
       </div>

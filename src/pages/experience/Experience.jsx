@@ -47,7 +47,7 @@ pour la base de donnée.
 export function Experience() {
   const {theme} = useThemeContext()
   return (
-    <div style={{ backgroundColor: theme.backgroundOdd }} className="experience">
+    <div id="experience" style={{ backgroundColor: theme.backgroundOdd }} className="experience">
       <div className="left-expe">
         <h1>Experience</h1>
       </div>

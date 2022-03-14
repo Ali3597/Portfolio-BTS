@@ -32,7 +32,7 @@ const skills = [
 
 export function Skills() {
     const {theme} = useThemeContext()
-    return <div style={{ backgroundColor: theme.backgroundEven }} className="skills">
+    return <div id="skills" style={{ backgroundColor: theme.backgroundEven }} className="skills">
         <h1>Skills</h1>
         <div  className="skills-elements">
             {skills.map((skill,index) => (

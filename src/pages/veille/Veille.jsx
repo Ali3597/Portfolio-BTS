@@ -4,7 +4,7 @@ import { useThemeContext } from '../../hooks/useThemeContext'
 
 export function Veille() {
     const {theme} = useThemeContext()
-    return <div style={{ backgroundColor: theme.backgroundEven }} className="veille">
+    return <div id="veille" style={{ backgroundColor: theme.backgroundEven }} className="veille">
         <h1>Veille
             
         </h1>

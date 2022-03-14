@@ -7,7 +7,11 @@ export function Home() {
   const { theme } = useThemeContext();
   console.log(theme);
   return (
-    <div style={{ backgroundColor: theme.backgroundOdd }} className="home">
+    <div
+      id="home"
+      style={{ backgroundColor: theme.backgroundOdd }}
+      className="home"
+    >
       <div className="left-home">
         <div>
           <img src={identite} alt="me" width="80%" height="80%" />
