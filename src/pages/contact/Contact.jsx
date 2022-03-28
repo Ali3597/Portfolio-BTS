@@ -11,7 +11,7 @@ export function Contact() {
     console.log(name,email,message)
   }
   return (
-    <div style={{ backgroundColor: theme.backgroundEven }} className="block">
+    <div style={{ backgroundColor: theme.backgroundEven }} id="contact" className="block">
       <div className="contact-left left">
         <h1 style={{ color: theme.greyTitleColor }}>Contact</h1>
       </div>

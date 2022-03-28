@@ -10,8 +10,8 @@
 .block {
   width: 100%;
   height: fit-content;
-  padding-left: 11%;
-  padding-right: 11%;
+  padding-left: calc(100% - 1300px);
+  padding-right: calc(100% - 1300px);
   display: flex;
   padding-top: 6%;
   padding-bottom: 5%;
@@ -29,4 +29,33 @@
   display: flex;
   flex-direction: column;
   width: 67%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: montserrat, sans-serif;
+}
+
+h1 {
+  font-size: 2.25rem;
+}
+
+p {
+  font-family: roboto, sans-serif;
+}
+
+@media screen and (max-width: 1300px) {
+  .block {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  .left h1 {
+    text-align: left;
+    width: 100%;
+  }
 }

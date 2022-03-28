@@ -1,10 +1,25 @@
-.veille {
-  height: fit-content;
-  background-color: #eaf2fa;
-  padding-left: 11%;
-  padding-right: 11%;
-  padding-top: 3%;
-  padding-bottom: 3%;
+.oneVeille {
   display: flex;
+  width: 100%;
   flex-direction: column;
+}
+
+.link-veille {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  margin-top: 5%;
+}
+
+#veille > .right > h1 {
+  margin-bottom: 5%;
+}
+#veille > .right > p {
+  line-height: 1.5em;
+  text-align: left;
+}
+
+.oneVeille > h3 {
+  text-align: left;
+  margin-top: 4%;
 }

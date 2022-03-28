@@ -21,8 +21,9 @@ export function ProjectList({ project, theme }) {
         <div className="project-left-links">
           {project.github && (
             <Link
-              icon={<AiFillGithub d size={15} />}
+              icon={<AiFillGithub size={15} />}
               p={"Code"}
+              psize={11}
               link={project.github}
             />
           )}
@@ -30,6 +31,7 @@ export function ProjectList({ project, theme }) {
             <Link
               icon={<FaLink size={15} />}
               p={"Project"}
+              psize={11}
               link={project.project}
             />
           )}

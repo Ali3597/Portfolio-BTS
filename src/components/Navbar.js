@@ -2,7 +2,7 @@ import "./Navbar.css";
 import { FaPalette } from "react-icons/fa";
 import { useThemeContext } from "../hooks/useThemeContext";
 import { Link } from "react-scroll";
-
+import Cv from "../assets/Cv.pdf";
 export function Navbar({ sticky }) {
   const { setTheme } = useThemeContext();
   return (
@@ -58,7 +58,11 @@ export function Navbar({ sticky }) {
                 Contact
               </Link>
             </li>
-            <li>Resume</li>
+            <li>
+              <a href={Cv} target="_blank">
+                Resume
+              </a>
+            </li>
             <li>
               <FaPalette onClick={setTheme} />
             </li>

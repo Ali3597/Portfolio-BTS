@@ -1,9 +1,9 @@
 import "./IconLink.css";
 
 
-export function Link({icon,p,link}) {
+export function Link({icon,p,link,psize}) {
   return (
-    <a className="a-link" target="_blank" href={link}>
+    <a style={{ fontSize:`${psize}px`}} className="a-link" target="_blank" href={link}>
      {icon} {p}
     </a>
   );

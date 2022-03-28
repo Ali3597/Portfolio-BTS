@@ -1,8 +1,8 @@
 .home {
-  height: 90vh;
-
-  padding-left: 11%;
-  padding-right: 11%;
+  min-height: 100vh;
+  max-height: fit-content;
+  padding-left: calc(100% - 1350px);
+  padding-right: calc(100% - 1350px);
   display: flex;
 }
 
@@ -12,6 +12,26 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.left-home > h1 {
+  margin-bottom: 4%;
+  margin-top: 1%;
+}
+
+.left-home > ul {
+  margin-top: 7%;
+  display: flex;
+  list-style: none;
+
+  width: 80%;
+  justify-content: space-around;
+}
+.left-home > ul > li {
+  cursor: pointer;
+}
+.left-home > ul > li:hover {
+  transform: scale(1.05);
 }
 .left-home div {
   height: 40vh;
@@ -29,21 +49,81 @@
   width: 67%;
   display: flex;
   text-align: left;
-  padding-top: 7%;
+  padding-top: 5%;
   padding-left: 3%;
   flex-direction: column;
 }
+.right-home > h1 {
+  font-size: 40.5px;
+  margin-bottom: 2%;
+}
+.right-home > p {
+  font-size: 18px;
+  line-height: 1.5em;
+}
 .interest {
   width: 100%;
-
+  margin-top: 4%;
   display: flex;
   flex: 1;
+  margin-left: 1%;
+}
+.interest > div > h3 {
+  font-size: 27px;
 }
 .interest div {
-  width: 50%;
+  width: 45%;
   height: 100%;
 }
 
 .interest :nth-child(2) ul {
   list-style: none;
+}
+.interest ul {
+  margin-left: 10%;
+  margin-top: 3%;
+}
+.interest-ul > li {
+  margin-bottom: 3%;
+  display: flex;
+  width: 100%;
+}
+.interest-ul > li > span {
+  margin-right: 1%;
+}
+.interest-lis {
+  flex-direction: column;
+  display: flex;
+  min-width: 100%;
+}
+.interest-lis > p {
+  font-size: 12px;
+}
+.up-li {
+  min-width: 100%;
+  margin-bottom: 1%;
+}
+.down-li {
+  min-width: 100%;
+}
+
+.interest-left > ul > li {
+  margin-bottom: 2%;
+}
+
+@media screen and (max-width: 1300px) {
+  .home {
+    flex-direction: column;
+    align-items: center;
+  }
+  .right-home {
+    margin-bottom: 4%;
+  }
+  .left-home {
+    width: 100%;
+    align-items: center;
+  }
+  .home-img {
+    width: 50% !important;
+  }
 }

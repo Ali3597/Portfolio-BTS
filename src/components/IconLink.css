@@ -2,8 +2,10 @@
   border-radius: 5px;
   width: fit-content;
   padding-left: 1%;
+  padding-top: 1%;
+  padding-bottom: 1%;
   padding-right: 1%;
-  height: 3vh;
+  height: fit-content;
   background-color: transparent;
   border: 1px solid #795548;
   cursor: pointer;
@@ -24,5 +26,5 @@
 }
 
 a svg {
-  margin-right: 5%;
+  margin-right: 10%;
 }
