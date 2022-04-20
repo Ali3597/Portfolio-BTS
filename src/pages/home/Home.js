@@ -5,13 +5,8 @@ import { FaGithub } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
 import { FaMailBulk } from "react-icons/fa";
 import { useThemeContext } from "../../hooks/useThemeContext";
+import { useCollection } from "../../hooks/useCollection";
 
-const interests = [
-  { title: "Competence 1" },
-  { title: "Competence 2" },
-  { title: "Competence 3" },
-  { title: "Competence 4" },
-];
 const Educations = [
   {
     title: "Ecole d'ingenierie EPSI",
@@ -29,6 +24,8 @@ const Educations = [
 
 export function Home() {
   const { theme } = useThemeContext();
+  const { documents: interests } = useCollection("interests");
+  const { documents: studies } = useCollection("studies");
   console.log(theme);
   return (
     <div
@@ -80,9 +77,10 @@ export function Home() {
           <div className="interest-left">
             <h3 style={{ color: theme.greyTitleColor }}>Interêts</h3>
             <ul style={{ color: theme.basicColor }}>
-              {interests.map((interest, index) => (
-                <li key={index}>{interest.title} </li>
-              ))}
+              {interests &&
+                interests.map((interest, index) => (
+                  <li key={index}>{interest.title} </li>
+                ))}
             </ul>
           </div>
           <div>

@@ -33,3 +33,16 @@
 .skill > h2 {
   font-size: 22px;
 }
+
+@media screen and (max-width: 750px) {
+  .skills-elements {
+    flex-direction: column !important;
+    align-items: center;
+  }
+  .skill {
+    margin-bottom: 10%;
+  }
+  .skills > h1 {
+    margin-bottom: 4%;
+  }
+}

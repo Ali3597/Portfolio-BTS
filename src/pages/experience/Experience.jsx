@@ -1,66 +1,20 @@
 import "./Experience.css";
 import { useThemeContext } from "../../hooks/useThemeContext";
-const experiences = [
-  {
-    start: "Janvier 2022",
-    end: "Mars 2022",
-    title: "Stage de developpement Web",
-    details: `Réalisation entière et mise en
-ligne d'un e-commerce à l'aide de
-Symfony et MySQL.'
-`,
-    location: "Dakar Senegal",
-    techno: ["PHP","Symfony","Javascript"],
-    active: false,
-    link: "https://www.google.com",
-    project:"Voip"
-  },
-    {
-    start: "Mars 2021",
-    end: " Août 2021",
-    title: "Stage de developpement Web",
-    details: `Réalisation d'une application web
-de CallCenter a l'aide d'ExpressJS
-pour le serveur Web et Asterisk
-pour le serveur VOIP et MongoDb
-pour la base de donnée.
-`,
-    location: "Dakar Senegal",
-    techno: ["Nodejs","Express","React","Asterisk"],
-    active: false,
-    link: "https://www.google.com",
-    project:"Callcenter"
-  },
-    {
-    start: "Septembre 2018",
-    end: "Août 2019",
-    title: "Preparateur de commande",
-    details:
-      "Je m'occupais de l'entrée et la sortie des marchandises dans une usine de métal.",
-    location: "Dakar Sénégal",
-    techno: null,
-    active: false,
-    link: null,
-    project:null,
-  },
-  {
-    start: "Septembre 2019",
-    end: "Août 2020",
-    title: "Commertial",
-    details:
-      "Vente de produits dans une usine de métal",
-    location: "Dakar Sénégal",
-    techno: null,
-    active: false,
-    link: null,
-    project:null,
-  },
-  
-  
-];
+import { useCollection } from "../../hooks/useCollection";
+import { useEffect } from "react";
 
 export function Experience() {
-  const {theme} = useThemeContext()
+  const { theme } = useThemeContext()
+  const { documents: experiences } = useCollection("experiences")
+  useEffect(() => {
+    if (experiences) {
+      experiences.map((expe) => {
+        console.log(expe.start.toDate().toLocaleDateString("fr"))
+      })
+    }
+    
+  },[experiences])
+
   return (
     <div id="experience" style={{ backgroundColor: theme.backgroundOdd }} className="experience block">
       <div className="left-expe left">
@@ -89,13 +43,13 @@ export function Experience() {
               </div>
               <div className="detail-expe">
                 <div style={{ backgroundColor: theme.cardBackground }} className="card-expe">
-                  <h1 style={{ color: theme.date}}>{experience.title}</h1>
-                  {experience.link && <a href={experience.link} target="_blank">{experience.project}</a>}
-                  <h5 style={{ color: theme.date}}>{experience.start}-{experience.end} . {experience.location}</h5>
+                  <h1 style={{ color: theme.date}}>{experience.company}</h1>
+                  {experience.projectLink && <a href={experience.projectLink} target="_blank">{experience.project}</a>}
+                  <h5 style={{ color: theme.date}}>{ experience.start.toDate().toLocaleDateString("fr") }-{experience.end.toDate().toLocaleDateString("fr")} . {experience.location}</h5>
                   <ul style={{ color: theme.basicColor }}>
                     <li> <span>Details</span> : {experience.details}</li>
-                    {experience.techno && <li> <span>Techno</span> : <ul>
-                      {experience.techno.map((t,index) => (
+                    {experience.technos && <li> <span>Techno</span> : <ul>
+                      {experience.technos.map((t,index) => (
                         <li key={index}> {t} </li>
                       ))}
                     </ul></li>}

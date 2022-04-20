@@ -3,18 +3,13 @@ import { useThemeContext } from '../../hooks/useThemeContext'
 import { Link } from '../../components/IconLink'
 import { FaProjectDiagram } from "react-icons/fa";
 import { FaPaperclip } from "react-icons/fa";
+import { useCollection } from '../../hooks/useCollection';
 
-const veilles = [
-    {
-    title: "Autonomous Vehicle A Technological Revolution",
-    produit: "https://google.com" ,
-    doc: "https://google.com" ,
-        message: ""
-    }
-]
+
 
 export function Veille() {
-    const {theme} = useThemeContext()
+    const { theme } = useThemeContext()
+    const  { documents: veilles } = useCollection("veilles")
     return <div id="veille"  style={{ backgroundColor: theme.backgroundEven }} className=" block">
         <div className="left"><h1>Veille</h1></div>
         <div className="right">
@@ -25,7 +20,7 @@ croissance future d'une industrie. Elle est généralement effectuée dans un ca
 planification stratégique en tenant compte de la situation actuelle, mais elle peut également être effectuée à un niveau plus personnel.
 Pour exercer cette compétence importante, nous avons travaillé en équipe pour établir un système qui nous aidera dans nos recherches futures.
 dans nos futures recherches.</p>
-            {veilles.map((veille,index) => (
+            {veilles && veilles.map((veille,index) => (
                 <div className="oneVeille" key={index}>
                     <h3>Sujet de ma veille  {" "}     : {" "} {veille.title}</h3>
                     <p>{veille.message}</p>
@@ -36,11 +31,11 @@ dans nos futures recherches.</p>
                             psize={14}
                             link={veille.doc}
                         />}
-                         {veille.produit && <Link
+                         {veille.product && <Link
                             icon={<FaPaperclip size={40} />}
                             p={"Produit de la veille"}
                             psize={14}
-                            link={veille.produit}
+                            link={veille.product}
                         />}
                     </div>
                 </div>
