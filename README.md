@@ -1,3 +1,3 @@
-interactive portfolio for BTS SIO SLAM option with an admin  side to change data without touch the code
+interactive portfolio for BTS SIO SLAM option with an admin  side to change data without change the code
 With react and firebase 
 Under development...
