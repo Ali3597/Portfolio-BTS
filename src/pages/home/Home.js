@@ -8,7 +8,7 @@ import { useThemeContext } from "../../hooks/useThemeContext";
 import { useCollection } from "../../hooks/useCollection";
 import { useEffect } from "react";
 
-export function Home() {
+export function Home({ admin }) {
   const { theme } = useThemeContext();
   const { documents: interests } = useCollection("interests");
   const { documents: studies } = useCollection("studies");

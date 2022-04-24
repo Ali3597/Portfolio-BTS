@@ -4,8 +4,10 @@ import { useThemeContext } from "../hooks/useThemeContext";
 import { Link } from "react-scroll";
 import { GiHamburgerMenu } from "react-icons/gi";
 import Cv from "../assets/Cv.pdf";
-export function Navbar({ sticky }) {
+import { FaEdit } from "react-icons/fa";
+export function Navbar({ user, toggleAdmin }) {
   const { setTheme } = useThemeContext();
+
   return (
     <nav className="navbar">
       <div className="container">
@@ -14,6 +16,7 @@ export function Navbar({ sticky }) {
           <GiHamburgerMenu size={20} />{" "}
         </span>
         <div className="name">ALI SALEH</div>
+
         <div className="anchor">
           <ul>
             <li>
@@ -72,6 +75,9 @@ export function Navbar({ sticky }) {
         </div>
         <span className="palette">
           <FaPalette size={15} onClick={setTheme} />
+        </span>
+        <span>
+          <FaEdit size={15} onClick={toggleAdmin} />
         </span>
       </div>
     </nav>

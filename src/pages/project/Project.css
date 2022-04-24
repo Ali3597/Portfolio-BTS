@@ -72,3 +72,12 @@
 .project-left-links a {
   margin-right: 1%;
 }
+
+.list-admin {
+  flex-direction: column;
+  display: flex;
+  margin-bottom: 10%;
+  align-items: center;
+
+  width: 100%;
+}

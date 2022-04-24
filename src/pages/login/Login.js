@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { useLogin } from "../hooks/useLogin";
+import { useLogin } from "../../hooks/useLogin";
+import "./Login.css";
 
-export default function Login() {
+export function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -13,9 +14,9 @@ export default function Login() {
   };
 
   return (
-    <div>
+    <div className="login">
       <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="login-form">
         <label>
           <span>email:</span>
           <input

@@ -3,6 +3,7 @@ import { Link } from "../../components/IconLink";
 
 import { FaLink } from "react-icons/fa";
 import { AiFillGithub } from "react-icons/ai";
+import projectDefault from "../../assets/project.png";
 
 export function ProjectList({ project, theme }) {
   return (
@@ -19,7 +20,7 @@ export function ProjectList({ project, theme }) {
         <p>{project.details}</p>
 
         <div className="project-left-links">
-          {project.github && (
+          {project.githubLink && (
             <Link
               icon={<AiFillGithub size={15} />}
               p={"Code"}
@@ -27,18 +28,23 @@ export function ProjectList({ project, theme }) {
               link={project.github}
             />
           )}
-          {project.project && (
+          {project.projectLink && (
             <Link
               icon={<FaLink size={15} />}
               p={"Project"}
               psize={11}
-              link={project.project}
+              link={project.projectLink}
             />
           )}
         </div>
       </div>
       <div className="project-list-right">
-        <img src={project.photo} alt="project" width="80%" height="60%" />
+        <img
+          src={project.photo ? project.photo : projectDefault}
+          alt="project"
+          width="80%"
+          height="60%"
+        />
       </div>
     </motion.div>
   );

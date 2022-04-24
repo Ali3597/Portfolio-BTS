@@ -1,0 +1,12 @@
+.project-admin {
+  display: flex;
+}
+
+.form-project-admin > * {
+  margin-bottom: 3%;
+}
+
+.form-project-admin {
+  display: flex;
+  flex-direction: column;
+}
