@@ -8,7 +8,7 @@ import { useFirestore } from "../../hooks/useFirestore";
 export function ProjectListAdmin({ project }) {
   const [details, setDetails] = useState(project ? project.details : null);
   const [newProject, setNewProject] = useState(true);
-  const { addDocument, response } = useFirestore("projects");
+  const { addDocument, updateDocument, response } = useFirestore("projects");
   const [githubLink, setGithubLink] = useState(
     project ? project.githubLink : null
   );
@@ -28,6 +28,15 @@ export function ProjectListAdmin({ project }) {
   const handleValid = async () => {
     if (newProject) {
       await addDocument({ details, githubLink, projectLink, title, type });
+    } else {
+      console.log("on updateeeeeeeee", project.id);
+      await updateDocument(project.id, {
+        details,
+        githubLink,
+        projectLink,
+        title,
+        type,
+      });
     }
   };
 
@@ -61,6 +70,7 @@ export function ProjectListAdmin({ project }) {
           cursor={"pointer"}
           onClick={handleValid}
         />
+        {response.error && <h1>{response.error}</h1>}
       </div>
     </div>
   );
