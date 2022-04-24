@@ -9,7 +9,7 @@ import { useToggle } from "./hooks/index";
 
 function App() {
   const { user, authIsReady } = useAuthContext();
-  const [admin, toggleAdmin] = useToggle(false);
+
   return (
     <div className="App">
       {authIsReady && (
@@ -20,8 +20,8 @@ function App() {
               element={
                 <>
                   {" "}
-                  <Navbar user={user} toggleAdmin={toggleAdmin} />
-                  <Content admin={admin} />
+                  <Navbar user={user} />
+                  <Content />
                   <Footer />{" "}
                 </>
               }

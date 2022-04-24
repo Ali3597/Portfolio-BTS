@@ -3,16 +3,18 @@ import "./Project.css";
 import { useThemeContext } from "../../hooks/useThemeContext";
 import { ProjectFilter } from "./ProjectsFilter";
 import { ProjectList } from "./ProjectList";
+import { FaEdit } from "react-icons/fa";
+import { useAuthContext } from "../../hooks/useAuthContext";
+import { useToggle } from "../../hooks";
 import { ProjectListAdmin } from "./ProjectListAdmin";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCollection } from "../../hooks/useCollection";
-import { useFirestore } from "../../hooks/useFirestore";
-import { FaPlusCircle } from "react-icons/fa";
 
-export function Project({ admin }) {
+export function Project() {
+  const { user } = useAuthContext();
   const { theme } = useThemeContext();
   const [currentFilter, setCurrentFilter] = useState("All");
-
+  const [admin, toggleAdmin] = useToggle(false);
   const [filters, setFilters] = useState([]);
   const [filteredProjects, setFilteredProjects] = useState([]);
   const [adminProjects, setAdminProjects] = useState([]);
@@ -22,7 +24,20 @@ export function Project({ admin }) {
   };
   useEffect(() => {
     if (projects) {
-      // set filters
+      const newProject = {
+        details: null,
+        id: null,
+        githubLink: null,
+        projectLink: null,
+        title: null,
+        type: null,
+      };
+      setAdminProjects([...projects, newProject]);
+    }
+  }, [projects]);
+
+  useEffect(() => {
+    if (projects && !admin) {
       let results = ["All"];
       projects.map((project) => {
         if (!results.includes(project.type)) {
@@ -30,9 +45,10 @@ export function Project({ admin }) {
         }
       });
       setFilters(results);
-      setAdminProjects(projects);
+      setCurrentFilter("All");
     }
-  }, [projects]);
+  }, [admin]);
+
   useEffect(() => {
     if (projects) {
       let pass = projects.filter((project) => {
@@ -47,19 +63,6 @@ export function Project({ admin }) {
     }
   }, [currentFilter, projects]);
 
-  const handleClick = () => {
-    const newProject = {
-      details: null,
-      id: null,
-      githubLink: null,
-      projectLink: null,
-      title: null,
-      type: null,
-    };
-
-    setAdminProjects([...adminProjects, newProject]);
-  };
-
   return (
     <div
       id="projects"
@@ -68,6 +71,7 @@ export function Project({ admin }) {
     >
       <div className="left-project left">
         <h1 style={{ color: theme.greyTitleColor }}>Projets</h1>
+        {user && <FaEdit onClick={toggleAdmin} cursor={"pointer"} />}
       </div>
       {!admin && projects && (
         <div className="right-project right">
@@ -80,8 +84,8 @@ export function Project({ admin }) {
           <motion.div layout>
             <AnimatePresence>
               {filteredProjects &&
-                filteredProjects.map((p, index) => (
-                  <ProjectList key={index} project={p} theme={theme} />
+                filteredProjects.map((p) => (
+                  <ProjectList key={p.id} project={p} theme={theme} />
                 ))}
             </AnimatePresence>
           </motion.div>
@@ -90,14 +94,8 @@ export function Project({ admin }) {
       {admin && projects && (
         <div className="list-admin">
           {adminProjects.map((p, index) => (
-            <ProjectListAdmin key={index} project={p} />
+            <ProjectListAdmin key={p.id ? p.id : index} project={p} />
           ))}
-          <FaPlusCircle
-            size={50}
-            color={"green"}
-            cursor={"pointer"}
-            onClick={handleClick}
-          />
         </div>
       )}
     </div>

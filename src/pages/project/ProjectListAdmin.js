@@ -2,22 +2,21 @@ import { useEffect, useState } from "react";
 import { Field } from "../../components/Field";
 import "./ProjectListAdmin.css";
 import { FaCheckCircle } from "react-icons/fa";
-import { db } from "../../firebase/config";
+import { FaMinusCircle } from "react-icons/fa";
+import { Modal } from "../../components/Modal";
 import { useFirestore } from "../../hooks/useFirestore";
+import { useToggle } from "../../hooks";
 
 export function ProjectListAdmin({ project }) {
-  const [details, setDetails] = useState(project ? project.details : null);
+  const [deleting, toggleDeleting] = useToggle(false);
+  const [details, setDetails] = useState(project.details);
   const [newProject, setNewProject] = useState(true);
-  const { addDocument, updateDocument, response } = useFirestore("projects");
-  const [githubLink, setGithubLink] = useState(
-    project ? project.githubLink : null
-  );
-
-  const [projectLink, setProjectLink] = useState(
-    project ? project.projectLink : null
-  );
-  const [title, setTitle] = useState(project ? project.title : null);
-  const [type, setType] = useState(project ? project.type : null);
+  const { addDocument, updateDocument, deleteDocument, response } =
+    useFirestore("projects");
+  const [githubLink, setGithubLink] = useState(project.githubLink);
+  const [projectLink, setProjectLink] = useState(project.projectLink);
+  const [title, setTitle] = useState(project.title);
+  const [type, setType] = useState(project.type);
 
   useEffect(() => {
     if (project.id) {
@@ -29,7 +28,6 @@ export function ProjectListAdmin({ project }) {
     if (newProject) {
       await addDocument({ details, githubLink, projectLink, title, type });
     } else {
-      console.log("on updateeeeeeeee", project.id);
       await updateDocument(project.id, {
         details,
         githubLink,
@@ -38,6 +36,10 @@ export function ProjectListAdmin({ project }) {
         type,
       });
     }
+  };
+  const handleDelete = async () => {
+    await deleteDocument(project.id);
+    toggleDeleting();
   };
 
   return (
@@ -48,30 +50,55 @@ export function ProjectListAdmin({ project }) {
           type={"textarea"}
           value={details}
           setValue={setDetails}
-        />
-        <Field
-          name={"Lien github"}
-          value={githubLink}
-          setValue={setGithubLink}
-        />
+        >
+          Details
+        </Field>
+        <input value={githubLink} />
+        <Field name={"Lien github"} value={githubLink} setValue={setGithubLink}>
+          Lien Github
+        </Field>
         <Field
           name={"Lien du projet"}
           value={projectLink}
           setValue={setProjectLink}
-        />
-        <Field name={"Titre"} value={title} setValue={setTitle} />
-        <Field name={"Type"} value={type} setValue={setType} />
-        <h3>{newProject ? "new" : "not new"}</h3>
+        >
+          Lien du projet
+        </Field>
+        <Field name={"Titre"} value={title} setValue={setTitle}>
+          Titre
+        </Field>
+        <Field name={"Type"} value={type} setValue={setType}>
+          Type
+        </Field>
       </div>
-      <div>
+      <div className={"project-admin-buttons"}>
+        {response.error}
         <FaCheckCircle
           size={50}
           color={"green"}
           cursor={"pointer"}
           onClick={handleValid}
         />
-        {response.error && <h1>{response.error}</h1>}
+        {!newProject && (
+          <FaMinusCircle
+            size={50}
+            color={"red"}
+            cursor={"pointer"}
+            onClick={toggleDeleting}
+          />
+        )}
       </div>
+      {!newProject && deleting && (
+        <Modal
+          onClose={toggleDeleting}
+          title={"Supprimer"}
+          message={
+            "Etes vous sure de votre choix , ce projet sera supprimé a jamais ?"
+          }
+          onClick={handleDelete}
+          buttonMessage={"Supprimer"}
+        />
+      )}
     </div>
   );
 }

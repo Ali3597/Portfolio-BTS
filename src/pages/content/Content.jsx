@@ -6,13 +6,13 @@ import { Contact } from '../contact/Contact'
 import { Skills } from '../skills/Skills'
 import { Veille } from '../veille/Veille'
 
-export function Content({admin}){
+export function Content(){
     return <div className="content">
-        <Home admin={admin} />
-        <Skills admin={admin}  />
-        <Experience admin={admin}  />
-        <Veille admin={admin}  />
-        <Project admin={admin}  />
-        <Contact admin={admin}  />
+        <Home  />
+        <Skills   />
+        <Experience   />
+        <Veille   />
+        <Project   />
+        <Contact   />
     </div>
 }

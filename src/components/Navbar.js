@@ -5,7 +5,7 @@ import { Link } from "react-scroll";
 import { GiHamburgerMenu } from "react-icons/gi";
 import Cv from "../assets/Cv.pdf";
 import { FaEdit } from "react-icons/fa";
-export function Navbar({ user, toggleAdmin }) {
+export function Navbar({ user }) {
   const { setTheme } = useThemeContext();
 
   return (
@@ -75,9 +75,6 @@ export function Navbar({ user, toggleAdmin }) {
         </div>
         <span className="palette">
           <FaPalette size={15} onClick={setTheme} />
-        </span>
-        <span>
-          <FaEdit size={15} onClick={toggleAdmin} />
         </span>
       </div>
     </nav>

@@ -74,10 +74,14 @@
 }
 
 .list-admin {
-  flex-direction: column;
+  flex-wrap: wrap;
   display: flex;
   margin-bottom: 10%;
   align-items: center;
 
   width: 100%;
+}
+
+.list-admin > * {
+  margin-right: 1%;
 }

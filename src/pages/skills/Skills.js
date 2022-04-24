@@ -1,51 +1,31 @@
 import "./Skills.css";
-import { FaNodeJs } from "react-icons/fa";
-import { FaPhp } from "react-icons/fa";
-import { FaDatabase } from "react-icons/fa";
-import { FaHtml5 } from "react-icons/fa";
-import { FaPython } from "react-icons/fa";
-import { FaChalkboard } from "react-icons/fa";
 
-import { SiCsharp } from "react-icons/si";
-
+import { FaEdit } from "react-icons/fa";
+import { useToggle } from "../../hooks";
+import { Skill } from "./Skill";
+import { SkillAdmin } from "./SkillAdmin";
 import { useCollection } from "../../hooks/useCollection";
-
 import { useThemeContext } from "../../hooks/useThemeContext";
 import { useEffect, useState } from "react";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 export function Skills() {
   const { theme } = useThemeContext();
   const { documents: skills } = useCollection("skills");
-  const [parsedSkills, setParsedSkills] = useState(null);
-
-  const findSVG = (title) => {
-    switch (title) {
-      case "Javascript":
-        return <FaNodeJs size={40} color={"#795548"} />;
-      case "Python":
-        return <FaPython size={40} color={"#795548"} />;
-      case "Html/Css":
-        return <FaHtml5 size={40} color={"#795548"} />;
-      case "PHP":
-        return <FaPhp size={40} color={"#795548"} />;
-      case "Databases":
-        return <FaDatabase size={40} color={"#795548"} />;
-      case "C#":
-        return <SiCsharp size={40} color={"#795548"} />;
-      default:
-        return <FaChalkboard size={40} color={"#795548"} />;
-    }
-  };
+  const [admin, toggleAdmin] = useToggle(false);
+  const [adminSkills, setAdminSkills] = useState([]);
+  const { user } = useAuthContext();
 
   useEffect(() => {
     if (skills) {
-      let finalSkillArray = [];
-      skills.map((skill) => {
-        finalSkillArray.push({ ...skill, svg: findSVG(skill.title) });
-      });
-      setParsedSkills(finalSkillArray);
+      const newSkill = {
+        title: null,
+        details: null,
+      };
+      setAdminSkills([...skills, newSkill]);
     }
   }, [skills]);
+
   return (
     <div
       id="skills"
@@ -53,18 +33,26 @@ export function Skills() {
       className="skills"
     >
       <h1 style={{ color: theme.greyTitleColor }}>Skills</h1>
-      <div className="skills-elements">
-        {parsedSkills &&
-          parsedSkills.map((skill, index) => (
-            <div key={index} className="skill">
-              <span>{skill.svg}</span>
-              <h2 style={{ color: theme.basicColor }}> {skill.title}</h2>
-              {skill.details && (
-                <p style={{ color: theme.basicColor }}>{skill.details}</p>
-              )}
-            </div>
+      {user && <FaEdit onClick={toggleAdmin} cursor={"pointer"} />}
+      {!admin && (
+        <div className="skills-elements">
+          {skills &&
+            skills.map((skill) => (
+              <Skill index={skill.id} skill={skill} theme={theme} />
+            ))}
+        </div>
+      )}
+      {admin && (
+        <div className={"skills-admin-elements"}>
+          {adminSkills.map((skill, index) => (
+            <SkillAdmin
+              skill={skill}
+              key={skill.id ? skill.id : index}
+              theme={theme}
+            />
           ))}
-      </div>
+        </div>
+      )}
     </div>
   );
 }
