@@ -4,7 +4,7 @@ import { useThemeContext } from "../hooks/useThemeContext";
 import { Link } from "react-scroll";
 import { GiHamburgerMenu } from "react-icons/gi";
 import Cv from "../assets/Cv.pdf";
-import { FaEdit } from "react-icons/fa";
+
 export function Navbar({ user }) {
   const { setTheme } = useThemeContext();
 

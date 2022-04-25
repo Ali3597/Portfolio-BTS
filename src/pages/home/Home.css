@@ -127,3 +127,14 @@
     width: 50% !important;
   }
 }
+
+.admin-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 1%;
+  margin-top: 1%;
+}
+.ul-interest {
+  display: flex;
+  flex-direction: column;
+}
