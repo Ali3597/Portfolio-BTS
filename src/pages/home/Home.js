@@ -19,7 +19,7 @@ export function Home() {
         <Profile theme={theme} />
       </div>
       <div className="right-home">
-        <Paragraphs theme={theme} />
+        <Paragraphs theme={theme} user={user} />
 
         <div className="interest">
           <Interests theme={theme} user={user} />

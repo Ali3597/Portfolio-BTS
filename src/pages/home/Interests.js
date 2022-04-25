@@ -31,8 +31,8 @@ export function Interests({ theme, user }) {
 
         {adminInterests &&
           admin &&
-          adminInterests.map((inte) => (
-            <InterestAdmin interest={inte} key={inte.id} />
+          adminInterests.map((inte, index) => (
+            <InterestAdmin interest={inte} key={inte.id ? inte.id : index} />
           ))}
       </ul>
     </div>
@@ -48,7 +48,7 @@ function InterestAdmin({ interest }) {
   const [newProject, setNewProject] = useState(true);
   const [deleting, toggleDeleting] = useToggle(false);
   const { addDocument, updateDocument, deleteDocument, response } =
-    useFirestore("skills");
+    useFirestore("interests");
 
   useEffect(() => {
     if (interest.id) {
@@ -82,11 +82,13 @@ function InterestAdmin({ interest }) {
           color={"green"}
           cursor={"pointer"}
         />
-        <FaMinusCircle
-          onClick={toggleDeleting}
-          color={"red"}
-          cursor={"pointer"}
-        />
+        {!newProject && (
+          <FaMinusCircle
+            onClick={toggleDeleting}
+            color={"red"}
+            cursor={"pointer"}
+          />
+        )}
       </div>
       {!newProject && deleting && (
         <Modal
