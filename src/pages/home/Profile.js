@@ -7,7 +7,7 @@ import { storage } from "../../firebase/config";
 import identite from "../../assets/identite.jpg";
 import { FaMailBulk } from "react-icons/fa";
 
-export function Profile({ theme }) {
+export function Profile({ theme, user }) {
   const imageRef = ref(storage, "me/profile");
   const [profile, setProfile] = useState(null);
 
@@ -26,7 +26,7 @@ export function Profile({ theme }) {
             height="90%"
           />
         )}
-        <InputFile link={"me/profile"} setFile={setProfile} />
+        {user && <InputFile link={"me/profile"} setFile={setProfile} />}
       </div>
       <h1 style={{ color: theme.basicColor }}>Ali Saleh</h1>
       <h3 style={{ color: theme.greyTitleColor }}>BTS SIO option SLAM</h3>

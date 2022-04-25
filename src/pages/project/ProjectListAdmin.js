@@ -74,14 +74,12 @@ export function ProjectListAdmin({ project }) {
       <div className={"project-admin-buttons"}>
         {response.error}
         <FaCheckCircle
-          size={50}
           color={"green"}
           cursor={"pointer"}
           onClick={handleValid}
         />
         {!newProject && (
           <FaMinusCircle
-            size={50}
             color={"red"}
             cursor={"pointer"}
             onClick={toggleDeleting}

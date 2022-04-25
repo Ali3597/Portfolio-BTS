@@ -47,7 +47,7 @@ export function Project() {
       setFilters(results);
       setCurrentFilter("All");
     }
-  }, [admin]);
+  }, [admin, projects]);
 
   useEffect(() => {
     if (projects) {

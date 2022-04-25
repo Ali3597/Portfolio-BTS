@@ -16,14 +16,14 @@ export function Home() {
       className="home"
     >
       <div className="left-home">
-        <Profile theme={theme} />
+        <Profile theme={theme} user={user} />
       </div>
       <div className="right-home">
         <Paragraphs theme={theme} user={user} />
 
         <div className="interest">
           <Interests theme={theme} user={user} />
-          <Studies theme={theme} />
+          <Studies theme={theme} user={user} />
         </div>
       </div>
     </div>
