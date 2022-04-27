@@ -1,6 +1,6 @@
 import './Content.css'
 import { Home } from '../home/Home'
-import { Experience } from '../experience/Experience'
+import { Experiences } from '../experience/Experiences'
 import { Project } from '../project/Project'
 import { Contact } from '../contact/Contact'
 import { Skills } from '../skills/Skills'
@@ -10,7 +10,7 @@ export function Content(){
     return <div className="content">
         <Home  />
         <Skills   />
-        <Experience   />
+        <Experiences   />
         <Veille   />
         <Project   />
         <Contact   />

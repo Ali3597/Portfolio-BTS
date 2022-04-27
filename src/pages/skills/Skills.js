@@ -38,7 +38,7 @@ export function Skills() {
         <div className="skills-elements">
           {skills &&
             skills.map((skill) => (
-              <Skill index={skill.id} skill={skill} theme={theme} />
+              <Skill key={skill.id} skill={skill} theme={theme} />
             ))}
         </div>
       )}
