@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Field } from "../../components/Field";
 import "./ProjectListAdmin.css";
+import projectDefault from "../../assets/project.png";
+import { InputFile } from "../../components/inputFile";
 import { FaCheckCircle } from "react-icons/fa";
 import { FaMinusCircle } from "react-icons/fa";
 import { Modal } from "../../components/Modal";
@@ -10,6 +12,8 @@ import { useToggle } from "../../hooks";
 export function ProjectListAdmin({ project }) {
   const [deleting, toggleDeleting] = useToggle(false);
   const [details, setDetails] = useState(project.details);
+  const [photo, setPhoto] = useState(project.photo);
+  const [changePhoto, setChangePhoto] = useState(null);
   const [newProject, setNewProject] = useState(true);
   const { addDocument, updateDocument, deleteDocument, response } =
     useFirestore("projects");
@@ -41,10 +45,32 @@ export function ProjectListAdmin({ project }) {
     await deleteDocument(project.id);
     toggleDeleting();
   };
+  useEffect(async () => {
+    if (changePhoto) {
+      try {
+        await updateDocument(project.id, {
+          photo: changePhoto,
+        });
+        setPhoto(changePhoto);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }, [changePhoto]);
 
   return (
     <div className={"project-admin"}>
       <div className={"form-project-admin"}>
+        {!newProject && (
+          <>
+            {" "}
+            <img src={photo ? photo : projectDefault} />{" "}
+            <InputFile
+              link={"projects/" + project.id}
+              setFile={setChangePhoto}
+            />{" "}
+          </>
+        )}
         <Field
           name={"Details"}
           type={"textarea"}
