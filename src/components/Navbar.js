@@ -1,12 +1,17 @@
 import "./Navbar.css";
 import { FaPalette } from "react-icons/fa";
+import { FaSignOutAlt } from "react-icons/fa";
+
 import { useThemeContext } from "../hooks/useThemeContext";
 import { Link } from "react-scroll";
 import { GiHamburgerMenu } from "react-icons/gi";
+
+import { useLogout } from "../hooks/useLogout";
 import Cv from "../assets/Cv.pdf";
 
 export function Navbar({ user }) {
   const { setTheme } = useThemeContext();
+  const { logout } = useLogout();
 
   return (
     <nav className="navbar">
@@ -74,7 +79,12 @@ export function Navbar({ user }) {
           </ul>
         </div>
         <span className="palette">
-          <FaPalette size={15} onClick={setTheme} />
+          {!user && (
+            <FaPalette size={15} cursor={"pointer"} onClick={setTheme} />
+          )}
+          {user && (
+            <FaSignOutAlt size={15} cursor={"pointer"} onClick={logout} />
+          )}
         </span>
       </div>
     </nav>

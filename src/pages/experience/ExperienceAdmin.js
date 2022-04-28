@@ -28,13 +28,6 @@ export const ExperienceAdmin = ({ experience }) => {
     }
   }, [experience.id]);
 
-  //// to delete
-  useEffect(() => {
-    if (technos) {
-      console.log(technos);
-    }
-  }, [technos]);
-
   const handleValid = async () => {
     if (newProject) {
       await addDocument({
