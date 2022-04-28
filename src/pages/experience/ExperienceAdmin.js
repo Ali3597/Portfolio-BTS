@@ -105,7 +105,8 @@ export const ExperienceAdmin = ({ experience }) => {
       <Field name={"projectLink"} value={projectLink} setValue={setProjectLink}>
         Lien du projet
       </Field>
-      {technos && <Technos technos={technos} setTechnos={setTechnos} />}
+      <h4> les Technos </h4>
+      <Technos technos={technos} setTechnos={setTechnos} />
       <div className={"project-admin-buttons"}>
         {response.error}
         <FaCheckCircle
@@ -140,7 +141,11 @@ export const ExperienceAdmin = ({ experience }) => {
 
 const Technos = ({ technos, setTechnos }) => {
   const addTechno = () => {
-    setTechnos((currentTechnos) => [...currentTechnos, ""]);
+    if (technos) {
+      setTechnos((currentTechnos) => [...currentTechnos, ""]);
+    } else {
+      setTechnos([""]);
+    }
   };
   const handleRemoveTechno = (index) => {
     setTechnos((currentTechnos) => [
@@ -150,27 +155,31 @@ const Technos = ({ technos, setTechnos }) => {
   };
   return (
     <>
-      {technos.map((tec, index) => (
-        <div key={index}>
-          <input
-            value={tec}
-            onChange={(e) => {
-              const value = e.target.value;
-              const indexFirst = index;
-              setTechnos((currentTechnos) =>
-                currentTechnos.map((t, index) =>
-                  index == indexFirst ? value : t
-                )
-              );
-            }}
-          />
-          <FaMinusCircle
-            cursor={"pointer"}
-            color={"red"}
-            onClick={() => handleRemoveTechno(index)}
-          />
-        </div>
-      ))}
+      {!technos && <p> aucune techno </p>}
+      {technos &&
+        technos.map((tec, index) => (
+          <div key={index}>
+            <input
+              value={tec}
+              onChange={(e) => {
+                const value = e.target.value;
+                const indexFirst = index;
+                setTechnos((currentTechnos) =>
+                  currentTechnos.map((t, index) =>
+                    index == indexFirst ? value : t
+                  )
+                );
+              }}
+            />
+
+            <FaMinusCircle
+              cursor={"pointer"}
+              color={"red"}
+              onClick={() => handleRemoveTechno(index)}
+            />
+          </div>
+        ))}
+      <p>Ajoutez une techno </p>
       <FaCheckCircle cursor={"pointer"} color={"green"} onClick={addTechno} />
     </>
   );
