@@ -7,6 +7,7 @@ import { useToggle } from "../../hooks";
 import { Modal } from "../../components/Modal";
 
 export const ExperienceAdmin = ({ experience }) => {
+  console.log(experience.technos);
   const [deleting, toggleDeleting] = useToggle(false);
   const [active, setActive] = useState(experience.active);
   const [company, setCompany] = useState(experience.company);
@@ -26,6 +27,13 @@ export const ExperienceAdmin = ({ experience }) => {
       setNewProject(false);
     }
   }, [experience.id]);
+
+  //// to delete
+  useEffect(() => {
+    if (technos) {
+      console.log(technos);
+    }
+  }, [technos]);
 
   const handleValid = async () => {
     if (newProject) {
@@ -97,7 +105,7 @@ export const ExperienceAdmin = ({ experience }) => {
       <Field name={"projectLink"} value={projectLink} setValue={setProjectLink}>
         Lien du projet
       </Field>
-
+      {technos && <Technos technos={technos} setTechnos={setTechnos} />}
       <div className={"project-admin-buttons"}>
         {response.error}
         <FaCheckCircle
@@ -127,5 +135,43 @@ export const ExperienceAdmin = ({ experience }) => {
         />
       )}
     </div>
+  );
+};
+
+const Technos = ({ technos, setTechnos }) => {
+  const addTechno = () => {
+    setTechnos((currentTechnos) => [...currentTechnos, ""]);
+  };
+  const handleRemoveTechno = (index) => {
+    setTechnos((currentTechnos) => [
+      ...currentTechnos.slice(0, index),
+      ...currentTechnos.slice(index + 1),
+    ]);
+  };
+  return (
+    <>
+      {technos.map((tec, index) => (
+        <div key={index}>
+          <input
+            value={tec}
+            onChange={(e) => {
+              const value = e.target.value;
+              const indexFirst = index;
+              setTechnos((currentTechnos) =>
+                currentTechnos.map((t, index) =>
+                  index == indexFirst ? value : t
+                )
+              );
+            }}
+          />
+          <FaMinusCircle
+            cursor={"pointer"}
+            color={"red"}
+            onClick={() => handleRemoveTechno(index)}
+          />
+        </div>
+      ))}
+      <FaCheckCircle cursor={"pointer"} color={"green"} onClick={addTechno} />
+    </>
   );
 };
