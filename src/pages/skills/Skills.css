@@ -10,6 +10,7 @@
 
 .skills > h1 {
   margin-bottom: 2%;
+  font-size: 40.5px;
 }
 .skills-elements {
   display: flex;
@@ -42,7 +43,19 @@
   flex-wrap: wrap;
 }
 
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 950px) {
+  .skills > h1 {
+    font-size: 32px;
+  }
+  .skill > h2 {
+    font-size: 17px;
+  }
+  .skill > p {
+    font-size: 11px;
+  }
+}
+
+@media screen and (max-width: 580px) {
   .skills-elements {
     flex-direction: column !important;
     align-items: center;
