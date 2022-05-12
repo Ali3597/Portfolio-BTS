@@ -49,9 +49,21 @@ p {
     flex-direction: column;
     align-items: center;
     width: 100%;
+    padding-left: 5%;
+    padding-right: 5%;
   }
-  .left h1 {
+  .left {
     text-align: left;
     width: 100%;
+    margin-bottom: 1%;
+  }
+  .right {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .right {
+    justify-content: center;
   }
 }

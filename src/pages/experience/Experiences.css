@@ -122,3 +122,27 @@
   flex-direction: column;
   border: 1px solid;
 }
+
+@media screen and (max-width: 950px) {
+  .left-expe > h1 {
+    font-size: 31px !important;
+  }
+  .card-expe > h1 {
+    font-size: 12.5px;
+  }
+  .card-expe > a {
+    font-size: 12.5px;
+  }
+  .card-expe > h5 {
+    font-size: 11px;
+  }
+  .card-expe > ul > li {
+    font-size: 11px;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .bord {
+    display: none;
+  }
+}
