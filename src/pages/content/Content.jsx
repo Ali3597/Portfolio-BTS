@@ -4,14 +4,14 @@ import { Experiences } from '../experience/Experiences'
 import { Project } from '../project/Project'
 import { Contact } from '../contact/Contact'
 import { Skills } from '../skills/Skills'
-import { Veille } from '../veille/Veille'
+import { Veille, Veilles } from '../veille/Veilles'
 
 export function Content(){
     return <div className="content">
         <Home  />
         <Skills   />
         <Experiences   />
-        <Veille   />
+        <Veilles   />
         <Project   />
         <Contact   />
     </div>
