@@ -5,11 +5,12 @@ import { FaSignOutAlt } from "react-icons/fa";
 import { useThemeContext } from "../hooks/useThemeContext";
 import { Link } from "react-scroll";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { useToggle } from "../hooks/index";
 
 import { useLogout } from "../hooks/useLogout";
 import Cv from "../assets/Cv.pdf";
 
-export function Navbar({ user }) {
+export function Navbar({ user, toggleOpened }) {
   const { setTheme } = useThemeContext();
   const { logout } = useLogout();
 
@@ -18,7 +19,7 @@ export function Navbar({ user }) {
       <div className="container">
         <span className="burger">
           {" "}
-          <GiHamburgerMenu size={20} />{" "}
+          <GiHamburgerMenu size={20} onClick={toggleOpened} />{" "}
         </span>
         <div className="name">ALI SALEH</div>
 

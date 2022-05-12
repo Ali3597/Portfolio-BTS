@@ -1,0 +1,28 @@
+.aside {
+  background-color: #f7f7f7;
+  width: 0px;
+  transition: width 0.7s;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  height: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.tab-burger {
+  width: 100%;
+}
+.tab-burger > ul > li {
+  cursor: pointer;
+  margin-top: 25px;
+}
+
+.opened {
+  width: 240px;
+}
+
+@media screen and (min-width: 750px) {
+  .aside {
+    display: none;
+  }
+}
