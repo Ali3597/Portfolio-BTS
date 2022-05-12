@@ -18,7 +18,9 @@
   margin-bottom: 4%;
   margin-top: 1%;
 }
-
+.left-home h3 {
+  font-size: 18px;
+}
 .left-home > ul {
   margin-top: 7%;
   display: flex;
@@ -57,7 +59,7 @@
   font-size: 40.5px;
   margin-bottom: 2%;
 }
-.right-home > p {
+.right-home p {
   font-size: 18px;
   line-height: 1.5em;
 }
@@ -69,7 +71,7 @@
   margin-left: 1%;
 }
 .interest > div > h3 {
-  font-size: 27px;
+  font-size: 22.5px;
 }
 .interest div {
   width: 45%;
@@ -110,24 +112,56 @@
 .interest-left > ul > li {
   margin-bottom: 2%;
 }
+.home-paras {
+  padding-right: 2%;
+}
+.right-home > p {
+  font-size: 13.5px;
+}
 
-@media screen and (max-width: 1300px) {
+@media screen and (max-width: 950px) {
   .home {
     flex-direction: column;
     align-items: center;
   }
+
   .right-home {
     margin-bottom: 4%;
+  }
+  .interest-left > ul > li {
+    font-size: 12.5px;
+  }
+  .up-li {
+    font-size: 12.5px;
+  }
+  .down-li {
+    font-size: 12.5px;
+  }
+  .right-home p {
+    font-size: 10px;
+  }
+  .right-home > h1 {
+    font-size: 31px;
+  }
+  .interest > div > h3 {
+    font-size: 17px;
   }
   .left-home {
     width: 100%;
     align-items: center;
+  }
+  .left-home h1 {
+    font-size: 22px;
+  }
+  .left-home h3 {
+    font-size: 14px;
   }
   .home-img {
     width: 50% !important;
   }
 }
 
+/* admin */
 .admin-buttons {
   display: flex;
   justify-content: space-around;

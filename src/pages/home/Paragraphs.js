@@ -24,11 +24,13 @@ export function Paragraphs({ theme, user }) {
     <>
       <h1 style={{ color: theme.greyTitleColor }}>Biographie</h1>
       {user && <FaEdit cursor={"pointer"} onClick={toggleAdmin} />}
-      {homeParagraphes &&
-        !admin &&
-        homeParagraphes.map((para) => (
-          <Paragraph key={para.id} para={para} theme={theme} />
-        ))}
+      {homeParagraphes && !admin && (
+        <div className="home-paras">
+          {homeParagraphes.map((para) => (
+            <Paragraph c key={para.id} para={para} theme={theme} />
+          ))}
+        </div>
+      )}
       {parasAdmin &&
         admin &&
         parasAdmin.map((para, index) => (
