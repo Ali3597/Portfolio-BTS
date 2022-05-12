@@ -17,9 +17,31 @@
 #veille > .right > p {
   line-height: 1.5em;
   text-align: left;
+  font-size: 18px;
 }
 
 .oneVeille > h3 {
   text-align: left;
   margin-top: 4%;
+}
+#veille > .right > h1 {
+  font-size: 42px;
+}
+
+@media screen and (max-width: 950px) {
+  #veille > .left > h1 {
+    font-size: 31px;
+  }
+  #veille > .left {
+    display: none;
+  }
+  #veille > .right > h1 {
+    font-size: 31px;
+  }
+  #veille > .right > p {
+    font-size: 13.8px;
+  }
+  #veille > .left > h1 {
+    font-size: 31px;
+  }
 }

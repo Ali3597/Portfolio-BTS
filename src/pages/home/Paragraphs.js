@@ -27,7 +27,7 @@ export function Paragraphs({ theme, user }) {
       {homeParagraphes && !admin && (
         <div className="home-paras">
           {homeParagraphes.map((para) => (
-            <Paragraph c key={para.id} para={para} theme={theme} />
+            <Paragraph key={para.id} para={para} theme={theme} />
           ))}
         </div>
       )}
