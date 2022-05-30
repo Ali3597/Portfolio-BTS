@@ -4,13 +4,17 @@ import { useFirestore } from "../../hooks/useFirestore";
 import { Field } from "../../components/Field";
 import { Modal } from "../../components/Modal";
 import { FaCheckCircle } from "react-icons/fa";
+import { InputFile } from "../../components/inputFile";
 import { FaMinusCircle } from "react-icons/fa";
 import { errorsVerification, errorFor } from "../../utils/Verification";
 export function VeilleAdmin({ veille, theme }) {
   const [errors, setErrors] = useState([]);
   const [doc, setDoc] = useState(veille.doc);
+  const [changeDoc, setChangeDoc] = useState(null);
   const [deleting, toggleDeleting] = useToggle(false);
   const [product, setProduct] = useState(veille.product);
+  const [changeProduct, setChangeProduct] = useState(null);
+
   const [newProject, setNewProject] = useState(true);
   const [title, setTitle] = useState(veille.title);
   const { addDocument, updateDocument, deleteDocument, response } =
@@ -25,9 +29,7 @@ export function VeilleAdmin({ veille, theme }) {
     setErrors([]);
     console.log("on verifie");
     const verificationArray = [
-      { field: "doc", content: doc, min: 5, exist: true },
       { field: "title", content: title, min: 5, exist: true },
-      { field: "product", content: product, min: 5, exist: true },
     ];
     const newErrors = errorsVerification(verificationArray);
     setErrors(newErrors);
@@ -47,6 +49,32 @@ export function VeilleAdmin({ veille, theme }) {
     await deleteDocument(veille.id);
     toggleDeleting();
   };
+
+  useEffect(async () => {
+    if (changeDoc) {
+      try {
+        await updateDocument(veille.id, {
+          doc: changeDoc,
+        });
+        setDoc(changeDoc);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }, [changeDoc]);
+
+  useEffect(async () => {
+    if (changeProduct) {
+      try {
+        await updateDocument(veille.id, {
+          product: changeProduct,
+        });
+        setProduct(changeProduct);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }, [changeProduct]);
   return (
     <>
       <Field
@@ -57,22 +85,27 @@ export function VeilleAdmin({ veille, theme }) {
       >
         Titre
       </Field>
-      <Field
-        name={"Doc"}
-        value={doc}
-        setValue={setDoc}
-        error={errorFor("doc", errors)}
-      >
-        Docupment de la veille
-      </Field>
-      <Field
-        name={"Product"}
-        value={product}
-        setValue={setProduct}
-        error={errorFor("product", errors)}
-      >
-        Produit de la veille
-      </Field>
+      {!newProject && (
+        <>
+          {" "}
+          {doc && <a href={doc}>Lien du document dela veille</a>}
+          <InputFile
+            link={"veilleDoc/" + veille.id}
+            setFile={setChangeDoc}
+          />{" "}
+        </>
+      )}
+      {!newProject && (
+        <>
+          {" "}
+          {product && <a href={product}>Lien du produit dela veille</a>}
+          <InputFile
+            link={"veilleProduct/" + veille.id}
+            setFile={setChangeProduct}
+          />{" "}
+        </>
+      )}
+
       <div className={"admin-buttons"}>
         <FaCheckCircle
           onClick={handleValid}

@@ -4,8 +4,10 @@ import { Link } from "../../components/IconLink";
 import { FaLink } from "react-icons/fa";
 import { AiFillGithub } from "react-icons/ai";
 import projectDefault from "../../assets/project.png";
+import { HiOutlineDocumentSearch } from "react-icons/hi";
 
 export function ProjectList({ project, theme }) {
+  console.log(project.photo);
   return (
     <motion.div
       layout
@@ -34,6 +36,14 @@ export function ProjectList({ project, theme }) {
               p={"Project"}
               psize={11}
               link={project.projectLink}
+            />
+          )}
+          {project.resume && (
+            <Link
+              icon={<HiOutlineDocumentSearch size={15} />}
+              p={"Resume"}
+              psize={11}
+              link={project.resume}
             />
           )}
         </div>

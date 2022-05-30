@@ -15,6 +15,8 @@ export function ProjectListAdmin({ project }) {
   const [deleting, toggleDeleting] = useToggle(false);
   const [details, setDetails] = useState(project.details);
   const [photo, setPhoto] = useState(project.photo);
+  const [resume, setResume] = useState(project.resume);
+  const [changeResume, setChangeResume] = useState(null);
   const [changePhoto, setChangePhoto] = useState(null);
   const [newProject, setNewProject] = useState(true);
   const { addDocument, updateDocument, deleteDocument, response } =
@@ -73,6 +75,18 @@ export function ProjectListAdmin({ project }) {
     }
   }, [changePhoto]);
 
+  useEffect(async () => {
+    if (changeResume) {
+      try {
+        await updateDocument(project.id, {
+          resume: changeResume,
+        });
+        setResume(changeResume);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }, [changeResume]);
   return (
     <div className={"project-admin"}>
       <div className={"form-project-admin"}>
@@ -128,6 +142,16 @@ export function ProjectListAdmin({ project }) {
         >
           Type
         </Field>
+        {!newProject && (
+          <>
+            {" "}
+            {resume && <a href={resume}>Lien du Resume</a>}
+            <InputFile
+              link={"resumeprojects/" + project.id}
+              setFile={setChangeResume}
+            />{" "}
+          </>
+        )}
       </div>
       <div className={"project-admin-buttons"}>
         {response.error}

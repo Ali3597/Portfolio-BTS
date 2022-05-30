@@ -1,3 +1,8 @@
+import { FaLink } from "react-icons/fa";
+
+import { Link } from "../../components/IconLink";
+import { HiOutlineDocumentSearch } from "react-icons/hi";
+
 export const Experience = ({ experience, index, allExperiences, theme }) => {
   return (
     <div key={index}>
@@ -38,6 +43,13 @@ export const Experience = ({ experience, index, allExperiences, theme }) => {
             <li>
               {" "}
               <span>Details</span> : {experience.details}
+              {experience.detailsList && (
+                <ul>
+                  {experience.detailsList.map((t, index) => (
+                    <li key={index}> {t} </li>
+                  ))}
+                </ul>
+              )}
             </li>
             {experience.technos && (
               <li>
@@ -51,6 +63,24 @@ export const Experience = ({ experience, index, allExperiences, theme }) => {
               </li>
             )}
           </ul>
+          <div className="experience-left-links">
+            {experience.attestation && (
+              <Link
+                icon={<HiOutlineDocumentSearch size={18} />}
+                p={"Code"}
+                psize={11}
+                link={experience.attestation}
+              />
+            )}
+            {experience.report && (
+              <Link
+                icon={<FaLink size={18} />}
+                p={"Project"}
+                psize={11}
+                link={experience.report}
+              />
+            )}
+          </div>
         </div>
       </div>
     </div>

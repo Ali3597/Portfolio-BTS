@@ -60,7 +60,7 @@
   transition: all 0.2s ease-out;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
-  padding-bottom: 5%;
+  padding-bottom: 2%;
 }
 .card-expe > h1 {
   text-align: left;
@@ -145,4 +145,13 @@
   .bord {
     display: none;
   }
+}
+
+.experience-left-links {
+  display: flex;
+  margin-left: 4%;
+}
+
+.experience-left-links a {
+  margin-right: 1%;
 }

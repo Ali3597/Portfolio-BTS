@@ -6,15 +6,21 @@ import { useFirestore } from "../../hooks/useFirestore";
 import { useToggle } from "../../hooks";
 import { Modal } from "../../components/Modal";
 import { errorsVerification, errorFor } from "../../utils/Verification";
+import { InputFile } from "../../components/inputFile";
 export const ExperienceAdmin = ({ experience }) => {
   console.log(experience.technos);
   const [errors, setErrors] = useState([]);
+  const [detailsList, setDetailsList] = useState(experience.detailsList);
   const [deleting, toggleDeleting] = useToggle(false);
   const [active, setActive] = useState(experience.active);
+  const [attestation, setAttestation] = useState(experience.attestation);
+  const [report, setReport] = useState(experience.report);
   const [company, setCompany] = useState(experience.company);
   const [details, setDetails] = useState(experience.details);
   const [start, setStart] = useState(experience.start);
   const [end, setEnd] = useState(experience.end);
+  const [changeAttestation, setChangeAttestation] = useState(null);
+  const [changeReport, setChangeReport] = useState(null);
   const [location, setLocation] = useState(experience.location);
   const [project, setProject] = useState(experience.project);
   const [projectLink, setProjectLink] = useState(experience.projectLink);
@@ -37,17 +43,17 @@ export const ExperienceAdmin = ({ experience }) => {
       { field: "details", content: details, min: 5, exist: true },
       { field: "start", content: start, exist: true },
       { field: "location", content: location, min: 5, exist: true },
-      { field: "project", content: project, min: 5, exist: true },
-      { field: "projectLink", content: projectLink, min: 5, exist: true },
     ];
     const newErrors = errorsVerification(verificationArray);
     setErrors(newErrors);
     if (newErrors.length == 0) {
+      console.log(detailsList);
       if (newProject) {
         await addDocument({
           active,
           company,
           details,
+          detailsList,
           start,
           end,
           location,
@@ -60,6 +66,7 @@ export const ExperienceAdmin = ({ experience }) => {
           active,
           company,
           details,
+          detailsList,
           start,
           end,
           location,
@@ -75,6 +82,32 @@ export const ExperienceAdmin = ({ experience }) => {
     await deleteDocument(experience.id);
     toggleDeleting();
   };
+
+  useEffect(async () => {
+    if (changeAttestation) {
+      try {
+        await updateDocument(experience.id, {
+          attestation: changeAttestation,
+        });
+        setAttestation(changeAttestation);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }, [changeAttestation]);
+
+  useEffect(async () => {
+    if (changeReport) {
+      try {
+        await updateDocument(experience.id, {
+          report: changeReport,
+        });
+        setReport(changeReport);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }, [changeReport]);
 
   return (
     <div className="admin-expe">
@@ -104,6 +137,7 @@ export const ExperienceAdmin = ({ experience }) => {
       >
         Details
       </Field>
+      <DetailsList detailsList={detailsList} setDetailsList={setDetailsList} />
       <Field
         name={"start"}
         type={"date"}
@@ -142,6 +176,26 @@ export const ExperienceAdmin = ({ experience }) => {
       </Field>
       <h4> les Technos </h4>
       <Technos technos={technos} setTechnos={setTechnos} />
+      {!newProject && (
+        <>
+          {" "}
+          {report && <a href={report}>Lien du Rapport</a>}
+          <InputFile
+            link={"report/" + experience.id}
+            setFile={setChangeReport}
+          />{" "}
+        </>
+      )}
+      {!newProject && (
+        <>
+          {" "}
+          {attestation && <a href={attestation}>Lien de l'attestation</a>}
+          <InputFile
+            link={"attestation/" + experience.id}
+            setFile={setChangeAttestation}
+          />{" "}
+        </>
+      )}
       <div className={"project-admin-buttons"}>
         {response.error}
         <FaCheckCircle
@@ -216,6 +270,56 @@ const Technos = ({ technos, setTechnos }) => {
         ))}
       <p>Ajoutez une techno </p>
       <FaCheckCircle cursor={"pointer"} color={"green"} onClick={addTechno} />
+    </>
+  );
+};
+
+const DetailsList = ({ detailsList, setDetailsList }) => {
+  const addDetailsList = () => {
+    if (detailsList) {
+      setDetailsList((currentDetailsList) => [...currentDetailsList, ""]);
+    } else {
+      setDetailsList([""]);
+    }
+  };
+  const handleRemoveDetailList = (index) => {
+    setDetailsList((currentDetailsList) => [
+      ...currentDetailsList.slice(0, index),
+      ...currentDetailsList.slice(index + 1),
+    ]);
+  };
+  return (
+    <>
+      {!detailsList && <p> aucun details </p>}
+      {detailsList &&
+        detailsList.map((tec, index) => (
+          <div key={index}>
+            <input
+              value={tec}
+              onChange={(e) => {
+                const value = e.target.value;
+                const indexFirst = index;
+                setDetailsList((detailsList) =>
+                  detailsList.map((t, index) =>
+                    index == indexFirst ? value : t
+                  )
+                );
+              }}
+            />
+
+            <FaMinusCircle
+              cursor={"pointer"}
+              color={"red"}
+              onClick={() => handleRemoveDetailList(index)}
+            />
+          </div>
+        ))}
+      <p>Ajoutez un detail </p>
+      <FaCheckCircle
+        cursor={"pointer"}
+        color={"green"}
+        onClick={addDetailsList}
+      />
     </>
   );
 };
