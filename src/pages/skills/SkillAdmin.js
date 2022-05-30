@@ -5,22 +5,34 @@ import { Field } from "../../components/Field";
 import { useFirestore } from "../../hooks/useFirestore";
 import { useToggle } from "../../hooks";
 import { Modal } from "../../components/Modal";
+import { errorsVerification, errorFor } from "../../utils/Verification";
 
 export function SkillAdmin({ skill, theme }) {
   const [deleting, toggleDeleting] = useToggle(false);
+  const [errors, setErrors] = useState([]);
   const [details, setDetails] = useState(skill.details);
   const [title, setTitle] = useState(skill.title);
   const [newProject, setNewProject] = useState(true);
   const { addDocument, updateDocument, deleteDocument, response } =
     useFirestore("skills");
   const handleValid = async () => {
-    if (newProject) {
-      await addDocument({ details, title });
-    } else {
-      await updateDocument(skill.id, {
-        details,
-        title,
-      });
+    setErrors([]);
+    console.log("on verifie");
+    const verificationArray = [
+      { field: "details", content: details, min: 5, exist: true },
+      { field: "title", content: title, min: 5, exist: true },
+    ];
+    const newErrors = errorsVerification(verificationArray);
+    setErrors(newErrors);
+    if (newErrors.length == 0) {
+      if (newProject) {
+        await addDocument({ details, title });
+      } else {
+        await updateDocument(skill.id, {
+          details,
+          title,
+        });
+      }
     }
   };
 
@@ -37,16 +49,23 @@ export function SkillAdmin({ skill, theme }) {
   return (
     <div className={"skill-admin"}>
       <Field
+        name={"Titre"}
+        value={title}
+        setValue={setTitle}
+        error={errorFor("title", errors)}
+      >
+        Titre
+      </Field>
+      <Field
         name={"Details"}
         type={"textarea"}
         value={details}
         setValue={setDetails}
+        error={errorFor("details", errors)}
       >
         Details
       </Field>
-      <Field name={"Titre"} value={title} setValue={setTitle}>
-        Titre
-      </Field>
+
       <div className={"project-admin-buttons"}>
         {response.error}
         <FaCheckCircle

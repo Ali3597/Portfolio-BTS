@@ -7,6 +7,7 @@ import { FaEdit } from "react-icons/fa";
 import { useToggle } from "../../hooks";
 import { useFirestore } from "../../hooks/useFirestore";
 import { Modal } from "../../components/Modal";
+import { errorsVerification, errorFor } from "../../utils/Verification";
 
 export function Interests({ theme, user }) {
   const { documents: interests } = useCollection("interests");
@@ -46,6 +47,7 @@ function Interest({ interest }) {
 function InterestAdmin({ interest }) {
   const [title, setTitle] = useState(interest.title);
   const [newProject, setNewProject] = useState(true);
+  const [errors, setErrors] = useState([]);
   const [deleting, toggleDeleting] = useToggle(false);
   const { addDocument, updateDocument, deleteDocument, response } =
     useFirestore("interests");
@@ -57,12 +59,21 @@ function InterestAdmin({ interest }) {
   }, [interest.id]);
 
   const handleValid = async () => {
-    if (newProject) {
-      await addDocument({ title });
-    } else {
-      await updateDocument(interest.id, {
-        title,
-      });
+    setErrors([]);
+    console.log("on verifie");
+    const verificationArray = [
+      { field: "title", content: title, min: 5, exist: true },
+    ];
+    const newErrors = errorsVerification(verificationArray);
+    setErrors(newErrors);
+    if (newErrors.length == 0) {
+      if (newProject) {
+        await addDocument({ title });
+      } else {
+        await updateDocument(interest.id, {
+          title,
+        });
+      }
     }
   };
 
@@ -73,7 +84,13 @@ function InterestAdmin({ interest }) {
 
   return (
     <>
-      <Field name={"Titre"} value={title} setValue={setTitle}>
+      <Field
+        name={"Titre"}
+        value={title}
+        setVal
+        error={errorFor("title", errors)}
+        ue={setTitle}
+      >
         Titre
       </Field>
       <div className={"admin-buttons"}>

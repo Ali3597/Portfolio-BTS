@@ -43,6 +43,9 @@ h6 {
 p {
   font-family: roboto, sans-serif;
 }
+.invalid-feedback {
+  color: red;
+}
 
 @media screen and (max-width: 950px) {
   .block {

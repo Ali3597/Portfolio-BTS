@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { Field } from "../../components/Field";
 import { useFirestore } from "../../hooks/useFirestore";
 import { Modal } from "../../components/Modal";
+import { errorsVerification, errorFor } from "../../utils/Verification";
 
 export function Paragraphs({ theme, user }) {
   const { documents: homeParagraphes } = useCollection("homeParagraphes");
@@ -46,6 +47,7 @@ function Paragraph({ para, theme }) {
 
 function ParagraphAdmin({ para }) {
   const [details, setDetails] = useState(para.details);
+  const [errors, setErrors] = useState([]);
   const [newProject, setNewProject] = useState(true);
   const [deleting, toggleDeleting] = useToggle(false);
   const { addDocument, updateDocument, deleteDocument, response } =
@@ -57,12 +59,21 @@ function ParagraphAdmin({ para }) {
   }, [para.id]);
 
   const handleValid = async () => {
-    if (newProject) {
-      await addDocument({ details });
-    } else {
-      await updateDocument(para.id, {
-        details,
-      });
+    setErrors([]);
+    console.log("on verifie");
+    const verificationArray = [
+      { field: "details", content: details, min: 50, exist: true },
+    ];
+    const newErrors = errorsVerification(verificationArray);
+    setErrors(newErrors);
+    if (newErrors.length == 0) {
+      if (newProject) {
+        await addDocument({ details });
+      } else {
+        await updateDocument(para.id, {
+          details,
+        });
+      }
     }
   };
 
@@ -77,6 +88,7 @@ function ParagraphAdmin({ para }) {
         type={"textarea"}
         value={details}
         setValue={setDetails}
+        error={errorFor("details", errors)}
       >
         Details
       </Field>

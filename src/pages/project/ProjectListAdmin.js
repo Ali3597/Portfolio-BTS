@@ -8,8 +8,10 @@ import { FaMinusCircle } from "react-icons/fa";
 import { Modal } from "../../components/Modal";
 import { useFirestore } from "../../hooks/useFirestore";
 import { useToggle } from "../../hooks";
+import { errorsVerification, errorFor } from "../../utils/Verification";
 
 export function ProjectListAdmin({ project }) {
+  const [errors, setErrors] = useState([]);
   const [deleting, toggleDeleting] = useToggle(false);
   const [details, setDetails] = useState(project.details);
   const [photo, setPhoto] = useState(project.photo);
@@ -29,16 +31,29 @@ export function ProjectListAdmin({ project }) {
   }, [project.id]);
 
   const handleValid = async () => {
-    if (newProject) {
-      await addDocument({ details, githubLink, projectLink, title, type });
-    } else {
-      await updateDocument(project.id, {
-        details,
-        githubLink,
-        projectLink,
-        title,
-        type,
-      });
+    setErrors([]);
+    console.log("on verifie");
+    const verificationArray = [
+      { field: "details", content: details, min: 5, exist: true },
+      { field: "githubLink", content: githubLink, min: 5, exist: true },
+      { field: "projectLink", content: projectLink, min: 5, exist: true },
+      { field: "title", content: title, min: 5, exist: true },
+      { field: "type", content: type, min: 5, exist: true },
+    ];
+    const newErrors = errorsVerification(verificationArray);
+    setErrors(newErrors);
+    if (newErrors.length == 0) {
+      if (newProject) {
+        await addDocument({ details, githubLink, projectLink, title, type });
+      } else {
+        await updateDocument(project.id, {
+          details,
+          githubLink,
+          projectLink,
+          title,
+          type,
+        });
+      }
     }
   };
   const handleDelete = async () => {
@@ -76,24 +91,41 @@ export function ProjectListAdmin({ project }) {
           type={"textarea"}
           value={details}
           setValue={setDetails}
+          error={errorFor("details", errors)}
         >
           Details
         </Field>
         <input value={githubLink} />
-        <Field name={"Lien github"} value={githubLink} setValue={setGithubLink}>
+        <Field
+          name={"Lien github"}
+          value={githubLink}
+          setValue={setGithubLink}
+          error={errorFor("githubLink", errors)}
+        >
           Lien Github
         </Field>
         <Field
           name={"Lien du projet"}
           value={projectLink}
           setValue={setProjectLink}
+          error={errorFor("projectLink", errors)}
         >
           Lien du projet
         </Field>
-        <Field name={"Titre"} value={title} setValue={setTitle}>
+        <Field
+          name={"Titre"}
+          value={title}
+          setValue={setTitle}
+          error={errorFor("title", errors)}
+        >
           Titre
         </Field>
-        <Field name={"Type"} value={type} setValue={setType}>
+        <Field
+          name={"Type"}
+          value={type}
+          setValue={setType}
+          error={errorFor("type", errors)}
+        >
           Type
         </Field>
       </div>

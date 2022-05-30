@@ -5,8 +5,9 @@ import { Field } from "../../components/Field";
 import { Modal } from "../../components/Modal";
 import { FaCheckCircle } from "react-icons/fa";
 import { FaMinusCircle } from "react-icons/fa";
-
+import { errorsVerification, errorFor } from "../../utils/Verification";
 export function VeilleAdmin({ veille, theme }) {
+  const [errors, setErrors] = useState([]);
   const [doc, setDoc] = useState(veille.doc);
   const [deleting, toggleDeleting] = useToggle(false);
   const [product, setProduct] = useState(veille.product);
@@ -21,14 +22,25 @@ export function VeilleAdmin({ veille, theme }) {
   }, [veille.id]);
 
   const handleValid = async () => {
-    if (newProject) {
-      await addDocument({ doc, title, product });
-    } else {
-      await updateDocument(veille.id, {
-        doc,
-        title,
-        product,
-      });
+    setErrors([]);
+    console.log("on verifie");
+    const verificationArray = [
+      { field: "doc", content: doc, min: 5, exist: true },
+      { field: "title", content: title, min: 5, exist: true },
+      { field: "product", content: product, min: 5, exist: true },
+    ];
+    const newErrors = errorsVerification(verificationArray);
+    setErrors(newErrors);
+    if (newErrors.length == 0) {
+      if (newProject) {
+        await addDocument({ doc, title, product });
+      } else {
+        await updateDocument(veille.id, {
+          doc,
+          title,
+          product,
+        });
+      }
     }
   };
   const handleDelete = async () => {
@@ -37,13 +49,28 @@ export function VeilleAdmin({ veille, theme }) {
   };
   return (
     <>
-      <Field name={"Title"} value={title} setValue={setTitle}>
+      <Field
+        name={"Title"}
+        value={title}
+        setValue={setTitle}
+        error={errorFor("title", errors)}
+      >
         Titre
       </Field>
-      <Field name={"Doc"} value={doc} setValue={setDoc}>
+      <Field
+        name={"Doc"}
+        value={doc}
+        setValue={setDoc}
+        error={errorFor("doc", errors)}
+      >
         Docupment de la veille
       </Field>
-      <Field name={"Product"} value={product} setValue={setProduct}>
+      <Field
+        name={"Product"}
+        value={product}
+        setValue={setProduct}
+        error={errorFor("product", errors)}
+      >
         Produit de la veille
       </Field>
       <div className={"admin-buttons"}>

@@ -5,9 +5,10 @@ import { Field } from "../../components/Field";
 import { useFirestore } from "../../hooks/useFirestore";
 import { useToggle } from "../../hooks";
 import { Modal } from "../../components/Modal";
-
+import { errorsVerification, errorFor } from "../../utils/Verification";
 export const ExperienceAdmin = ({ experience }) => {
   console.log(experience.technos);
+  const [errors, setErrors] = useState([]);
   const [deleting, toggleDeleting] = useToggle(false);
   const [active, setActive] = useState(experience.active);
   const [company, setCompany] = useState(experience.company);
@@ -29,30 +30,44 @@ export const ExperienceAdmin = ({ experience }) => {
   }, [experience.id]);
 
   const handleValid = async () => {
-    if (newProject) {
-      await addDocument({
-        active,
-        company,
-        details,
-        start,
-        end,
-        location,
-        project,
-        projectLink,
-        technos,
-      });
-    } else {
-      await updateDocument(experience.id, {
-        active,
-        company,
-        details,
-        start,
-        end,
-        location,
-        project,
-        projectLink,
-        technos,
-      });
+    setErrors([]);
+    console.log("on verifie");
+    const verificationArray = [
+      { field: "company", content: company, min: 5, exist: true },
+      { field: "details", content: details, min: 5, exist: true },
+      { field: "start", content: start, exist: true },
+      { field: "location", content: location, min: 5, exist: true },
+      { field: "project", content: project, min: 5, exist: true },
+      { field: "projectLink", content: projectLink, min: 5, exist: true },
+    ];
+    const newErrors = errorsVerification(verificationArray);
+    setErrors(newErrors);
+    if (newErrors.length == 0) {
+      if (newProject) {
+        await addDocument({
+          active,
+          company,
+          details,
+          start,
+          end,
+          location,
+          project,
+          projectLink,
+          technos,
+        });
+      } else {
+        await updateDocument(experience.id, {
+          active,
+          company,
+          details,
+          start,
+          end,
+          location,
+          project,
+          projectLink,
+          technos,
+        });
+      }
     }
   };
 
@@ -71,7 +86,12 @@ export const ExperienceAdmin = ({ experience }) => {
       >
         Travail Actuel ?
       </Field>
-      <Field name={"company"} value={company} setValue={setCompany}>
+      <Field
+        name={"company"}
+        value={company}
+        setValue={setCompany}
+        error={errorFor("company", errors)}
+      >
         ENtreprise
       </Field>
 
@@ -80,22 +100,44 @@ export const ExperienceAdmin = ({ experience }) => {
         type={"textarea"}
         value={details}
         setValue={setDetails}
+        error={errorFor("details", errors)}
       >
         Details
       </Field>
-      <Field name={"start"} type={"date"} value={start} setValue={setStart}>
+      <Field
+        name={"start"}
+        type={"date"}
+        value={start}
+        setValue={setStart}
+        error={errorFor("start", errors)}
+      >
         Début
       </Field>
       <Field name={"end"} type={"date"} value={end} setValue={setEnd}>
         Fin
       </Field>
-      <Field name={"Location"} value={location} setValue={setLocation}>
+      <Field
+        name={"Location"}
+        value={location}
+        setValue={setLocation}
+        error={errorFor("location", errors)}
+      >
         Lieu
       </Field>
-      <Field name={"project"} value={project} setValue={setProject}>
+      <Field
+        name={"project"}
+        value={project}
+        setValue={setProject}
+        error={errorFor("project", errors)}
+      >
         Nom du projet
       </Field>
-      <Field name={"projectLink"} value={projectLink} setValue={setProjectLink}>
+      <Field
+        name={"projectLink"}
+        value={projectLink}
+        setValue={setProjectLink}
+        error={errorFor("projectLink", errors)}
+      >
         Lien du projet
       </Field>
       <h4> les Technos </h4>

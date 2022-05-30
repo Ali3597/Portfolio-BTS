@@ -29,8 +29,10 @@ export const Experience = ({ experience, index, allExperiences, theme }) => {
           )}
           <h5 style={{ color: theme.date }}>
             {experience.start.toDate().toLocaleDateString("fr")}-
-            {experience.end.toDate().toLocaleDateString("fr")} .{" "}
-            {experience.location}
+            {experience.end
+              ? experience.end.toDate().toLocaleDateString("fr")
+              : "En cours"}{" "}
+            . {experience.location}
           </h5>
           <ul style={{ color: theme.basicColor }}>
             <li>

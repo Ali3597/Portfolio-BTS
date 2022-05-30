@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { Field } from "../../components/Field";
 import { useFirestore } from "../../hooks/useFirestore";
 import { Modal } from "../../components/Modal";
+import { errorsVerification, errorFor } from "../../utils/Verification";
 export function Studies({ theme, user }) {
   const { documents: studies } = useCollection("studies");
   const [admin, toggleAdmin] = useToggle(false);
@@ -85,7 +86,7 @@ function Study({ educ, theme }) {
 }
 
 function StudyAdmin({ study }) {
-  console.log(study, "dezfijzeoidjeùpzjfcôiejfôi");
+  const [errors, setErrors] = useState([]);
   const [details, setDetails] = useState(study.details);
   const [end, setEnd] = useState(study.end);
   const [start, setStart] = useState(study.start);
@@ -104,17 +105,31 @@ function StudyAdmin({ study }) {
   }, [study.id]);
 
   const handleValid = async () => {
-    if (newProject) {
-      await addDocument({ details, end, start, title, school, location });
-    } else {
-      await updateDocument(study.id, {
-        details,
-        end,
-        start,
-        title,
-        school,
-        location,
-      });
+    setErrors([]);
+    console.log("on verifie");
+    const verificationArray = [
+      { field: "details", content: details, min: 5, exist: true },
+      { field: "start", content: start, exist: true },
+      { field: "title", content: title, min: 5, max: 200, exist: true },
+      { field: "school", content: school, min: 5, max: 200, exist: true },
+      { field: "location", content: location, min: 5, max: 200, exist: true },
+    ];
+    const newErrors = errorsVerification(verificationArray);
+
+    setErrors(newErrors);
+    if (newErrors.length == 0) {
+      if (newProject) {
+        await addDocument({ details, end, start, title, school, location });
+      } else {
+        await updateDocument(study.id, {
+          details,
+          end,
+          start,
+          title,
+          school,
+          location,
+        });
+      }
     }
   };
 
@@ -125,13 +140,28 @@ function StudyAdmin({ study }) {
 
   return (
     <>
-      <Field name={"Titre"} value={title} setValue={setTitle}>
+      <Field
+        name={"Titre"}
+        value={title}
+        setValue={setTitle}
+        error={errorFor("title", errors)}
+      >
         Titre
       </Field>
-      <Field name={"Location"} value={location} setValue={setLocation}>
+      <Field
+        name={"Location"}
+        value={location}
+        setValue={setLocation}
+        error={errorFor("localisation", errors)}
+      >
         Localisation
       </Field>
-      <Field name={"School"} value={school} setValue={setSchool}>
+      <Field
+        name={"School"}
+        value={school}
+        setValue={setSchool}
+        error={errorFor("school", errors)}
+      >
         Ecole
       </Field>
       <Field
@@ -139,10 +169,17 @@ function StudyAdmin({ study }) {
         type={"textarea"}
         value={details}
         setValue={setDetails}
+        error={errorFor("details", errors)}
       >
         Details
       </Field>
-      <Field name={"start"} type={"date"} value={start} setValue={setStart}>
+      <Field
+        name={"start"}
+        type={"date"}
+        value={start}
+        setValue={setStart}
+        error={errorFor("start", errors)}
+      >
         Date de début
       </Field>
       <Field name={"end"} type={"date"} value={end} setValue={setEnd}>
