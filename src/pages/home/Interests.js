@@ -45,7 +45,7 @@ function Interest({ interest }) {
 }
 
 function InterestAdmin({ interest }) {
-  const [title, setTitle] = useState(interest.title);
+  const [title, setTitle] = useState(interest.title ? interest.title : "");
   const [newProject, setNewProject] = useState(true);
   const [errors, setErrors] = useState([]);
   const [deleting, toggleDeleting] = useToggle(false);
@@ -87,9 +87,8 @@ function InterestAdmin({ interest }) {
       <Field
         name={"Titre"}
         value={title}
-        setVal
+        setValue={setTitle}
         error={errorFor("title", errors)}
-        ue={setTitle}
       >
         Titre
       </Field>

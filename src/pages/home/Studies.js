@@ -87,12 +87,18 @@ function Study({ educ, theme }) {
 
 function StudyAdmin({ study }) {
   const [errors, setErrors] = useState([]);
-  const [details, setDetails] = useState(study.details);
-  const [end, setEnd] = useState(study.end);
-  const [start, setStart] = useState(study.start);
-  const [title, setTitle] = useState(study.title);
-  const [school, setSchool] = useState(study.school);
-  const [location, setLocation] = useState(study.location);
+  const [details, setDetails] = useState(study.details ? study.details : "");
+  const [end, setEnd] = useState(
+    study.end ? study.end.toDate().toISOString().split("T")[0] : ""
+  );
+  const [start, setStart] = useState(
+    study.start ? study.start.toDate().toISOString().split("T")[0] : ""
+  );
+  const [title, setTitle] = useState(study.title ? study.title : "");
+  const [school, setSchool] = useState(study.school ? study.school : "");
+  const [location, setLocation] = useState(
+    study.location ? study.location : ""
+  );
   const [newProject, setNewProject] = useState(true);
   const { addDocument, updateDocument, deleteDocument, response } =
     useFirestore("studies");

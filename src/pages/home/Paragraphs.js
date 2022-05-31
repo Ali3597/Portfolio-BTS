@@ -46,7 +46,7 @@ function Paragraph({ para, theme }) {
 }
 
 function ParagraphAdmin({ para }) {
-  const [details, setDetails] = useState(para.details);
+  const [details, setDetails] = useState(para.details ? para.details : "");
   const [errors, setErrors] = useState([]);
   const [newProject, setNewProject] = useState(true);
   const [deleting, toggleDeleting] = useToggle(false);

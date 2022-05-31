@@ -8,7 +8,6 @@ import { Modal } from "../../components/Modal";
 import { errorsVerification, errorFor } from "../../utils/Verification";
 import { InputFile } from "../../components/inputFile";
 export const ExperienceAdmin = ({ experience }) => {
-  console.log(experience.technos);
   const [errors, setErrors] = useState([]);
   const [detailsList, setDetailsList] = useState(experience.detailsList);
   const [deleting, toggleDeleting] = useToggle(false);

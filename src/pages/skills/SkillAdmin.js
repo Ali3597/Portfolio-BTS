@@ -10,8 +10,8 @@ import { errorsVerification, errorFor } from "../../utils/Verification";
 export function SkillAdmin({ skill, theme }) {
   const [deleting, toggleDeleting] = useToggle(false);
   const [errors, setErrors] = useState([]);
-  const [details, setDetails] = useState(skill.details);
-  const [title, setTitle] = useState(skill.title);
+  const [details, setDetails] = useState(skill.details ? skill.details : " ");
+  const [title, setTitle] = useState(skill.title ? skill.title : "");
   const [newProject, setNewProject] = useState(true);
   const { addDocument, updateDocument, deleteDocument, response } =
     useFirestore("skills");
