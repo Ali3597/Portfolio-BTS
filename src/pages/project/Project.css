@@ -22,8 +22,9 @@
 .project-list-left h1 {
   font-size: 17px;
 }
-.project-list-left p {
+.project-list-left > p {
   margin-top: 2%;
+  overflow: hidden;
   font-size: 14px;
 }
 .project-list-right {
@@ -84,4 +85,8 @@
 
 .list-admin > * {
   margin-right: 1%;
+}
+
+.right-project {
+  transition: all ease-in-out 0.5s;
 }

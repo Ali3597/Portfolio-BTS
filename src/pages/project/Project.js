@@ -18,10 +18,15 @@ export function Project() {
   const [filters, setFilters] = useState([]);
   const [filteredProjects, setFilteredProjects] = useState([]);
   const [adminProjects, setAdminProjects] = useState([]);
+  const [random, setRandom] = useState(null);
   const { documents: projects } = useCollection("projects");
+  const [size, setSize] = useState(50);
   const changeFilter = (newFilter) => {
     setCurrentFilter(newFilter);
   };
+  // useEffect(() => {
+  //   setSize(50);
+  // }, [theme]);
   useEffect(() => {
     if (projects) {
       const newProject = {
@@ -35,6 +40,9 @@ export function Project() {
       setAdminProjects([...projects, newProject]);
     }
   }, [projects]);
+  useEffect(() => {
+    console.log("ojkkk");
+  }, []);
 
   useEffect(() => {
     if (projects && !admin) {
@@ -51,6 +59,11 @@ export function Project() {
 
   useEffect(() => {
     if (projects) {
+      setSize(50);
+      const newRandom = Date.now();
+      setFilteredProjects([]);
+      setRandom(newRandom);
+
       let pass = projects.filter((project) => {
         switch (currentFilter) {
           case "All":
@@ -61,12 +74,19 @@ export function Project() {
       });
       setFilteredProjects(pass);
     }
-  }, [currentFilter, projects]);
+  }, [currentFilter, projects, theme]);
+  useEffect(() => {
+    if (size) {
+      console.log(size, "ma belle size ");
+    }
+  }, [size]);
 
   return (
     <div
       id="projects"
-      style={{ backgroundColor: theme.backgroundOdd }}
+      style={{
+        backgroundColor: theme.backgroundOdd,
+      }}
       className="block"
     >
       <div className="left-project left">
@@ -74,18 +94,30 @@ export function Project() {
         {user && <FaEdit onClick={toggleAdmin} cursor={"pointer"} />}
       </div>
       {!admin && projects && (
-        <div className="right-project right">
+        <div
+          className="right-project right"
+          style={{
+            height: `${size + 50}px`,
+          }}
+        >
           <ProjectFilter
             currentFilter={currentFilter}
             changeFilter={changeFilter}
             filters={filters}
             theme={theme}
           />
+
           <motion.div layout>
             <AnimatePresence>
               {filteredProjects &&
-                filteredProjects.map((p) => (
-                  <ProjectList key={p.id} project={p} theme={theme} />
+                filteredProjects.map((p, index) => (
+                  <ProjectList
+                    key={index}
+                    project={p}
+                    theme={theme}
+                    setSize={setSize}
+                    random={random}
+                  />
                 ))}
             </AnimatePresence>
           </motion.div>

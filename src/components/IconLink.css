@@ -1,6 +1,6 @@
 .a-link {
   border-radius: 5px;
-  width: fit-content;
+  width: max-content;
   padding-left: 1%;
   padding-top: 1%;
   padding-bottom: 1%;
@@ -18,7 +18,9 @@
   font-size: 11px;
   margin-top: 2%;
 }
-
+.a-link > p {
+  width: max-content;
+}
 .a-link:hover {
   background-color: #795548;
 

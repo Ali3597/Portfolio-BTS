@@ -5,17 +5,30 @@ import { FaLink } from "react-icons/fa";
 import { AiFillGithub } from "react-icons/ai";
 import projectDefault from "../../assets/project.png";
 import { HiOutlineDocumentSearch } from "react-icons/hi";
+import React, { useEffect, useRef, useState } from "react";
 
-export function ProjectList({ project, theme }) {
-  console.log(project.photo);
+export const ProjectList = React.memo(function ({
+  project,
+  theme,
+  setSize,
+  random,
+}) {
+  const myRef = useRef();
+  useEffect(() => {
+    if (myRef.current) {
+      setSize((prevSize) => prevSize + myRef.current.clientHeight);
+    }
+  }, [myRef.current, random]);
+
   return (
     <motion.div
       layout
-      animate={{ opacity: 1, scale: 1 }}
-      initial={{ opacity: 0, scale: 0 }}
-      exit={{ opacity: 0, scale: 0 }}
-      transition={{ duration: 0.7 }}
+      animate={{ opacity: 1, visibility: "visible" }}
+      initial={{ opacity: 0, visibility: "hidden" }}
+      exit={{ opacity: 0, visibility: "hidden" }}
+      transition={{ duration: 0.5 }}
       className="project-list"
+      ref={myRef}
     >
       <div style={{ color: theme.basicColor }} className="project-list-left">
         <h1>{project.title}</h1>
@@ -24,7 +37,7 @@ export function ProjectList({ project, theme }) {
         <div className="project-left-links">
           {project.githubLink && (
             <Link
-              icon={<AiFillGithub size={15} />}
+              icon={<AiFillGithub size={20} />}
               p={"Code"}
               psize={11}
               link={project.github}
@@ -32,15 +45,15 @@ export function ProjectList({ project, theme }) {
           )}
           {project.projectLink && (
             <Link
-              icon={<FaLink size={15} />}
-              p={"Project"}
+              icon={<FaLink size={20} />}
+              p={"Projet"}
               psize={11}
               link={project.projectLink}
             />
           )}
           {project.resume && (
             <Link
-              icon={<HiOutlineDocumentSearch size={15} />}
+              icon={<HiOutlineDocumentSearch size={20} />}
               p={"Resume"}
               psize={11}
               link={project.resume}
@@ -52,10 +65,10 @@ export function ProjectList({ project, theme }) {
         <img
           src={project.photo ? project.photo : projectDefault}
           alt="project"
-          width="80%"
-          height="60%"
+          width="150px"
+          height="80px"
         />
       </div>
     </motion.div>
   );
-}
+});

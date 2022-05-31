@@ -13,7 +13,9 @@ import { errorsVerification, errorFor } from "../../utils/Verification";
 export function ProjectListAdmin({ project }) {
   const [errors, setErrors] = useState([]);
   const [deleting, toggleDeleting] = useToggle(false);
-  const [details, setDetails] = useState(project.details);
+  const [details, setDetails] = useState(
+    project.details ? project.details : ""
+  );
   const [photo, setPhoto] = useState(project.photo);
   const [resume, setResume] = useState(project.resume);
   const [changeResume, setChangeResume] = useState(null);
@@ -21,10 +23,14 @@ export function ProjectListAdmin({ project }) {
   const [newProject, setNewProject] = useState(true);
   const { addDocument, updateDocument, deleteDocument, response } =
     useFirestore("projects");
-  const [githubLink, setGithubLink] = useState(project.githubLink);
-  const [projectLink, setProjectLink] = useState(project.projectLink);
-  const [title, setTitle] = useState(project.title);
-  const [type, setType] = useState(project.type);
+  const [githubLink, setGithubLink] = useState(
+    project.githubLink ? project.githubLink : ""
+  );
+  const [projectLink, setProjectLink] = useState(
+    project.projectLink ? project.projectLink : ""
+  );
+  const [title, setTitle] = useState(project.title ? project.title : "");
+  const [type, setType] = useState(project.type ? project.type : "");
 
   useEffect(() => {
     if (project.id) {
@@ -37,8 +43,7 @@ export function ProjectListAdmin({ project }) {
     console.log("on verifie");
     const verificationArray = [
       { field: "details", content: details, min: 5, exist: true },
-      { field: "githubLink", content: githubLink, min: 5, exist: true },
-      { field: "projectLink", content: projectLink, min: 5, exist: true },
+
       { field: "title", content: title, min: 5, exist: true },
       { field: "type", content: type, min: 5, exist: true },
     ];
@@ -93,7 +98,11 @@ export function ProjectListAdmin({ project }) {
         {!newProject && (
           <>
             {" "}
-            <img src={photo ? photo : projectDefault} />{" "}
+            <img
+              width="150px"
+              height="80px"
+              src={photo ? photo : projectDefault}
+            />{" "}
             <InputFile
               link={"projects/" + project.id}
               setFile={setChangePhoto}
@@ -109,7 +118,7 @@ export function ProjectListAdmin({ project }) {
         >
           Details
         </Field>
-        <input value={githubLink} />
+
         <Field
           name={"Lien github"}
           value={githubLink}
