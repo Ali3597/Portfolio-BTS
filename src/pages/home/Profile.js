@@ -32,13 +32,22 @@ export function Profile({ theme, user }) {
       <h3 style={{ color: theme.greyTitleColor }}>BTS SIO option SLAM</h3>
       <ul>
         <li>
-          <FaMailBulk size={40} color={"#795548"} />
+          <a href="mailto:ali_saleh-4@hotmail.fr">
+            <FaMailBulk size={40} color={"#795548"} />{" "}
+          </a>
         </li>
         <li>
-          <FaGithub size={40} color={"#795548"} />
+          <a href={"https://github.com/Ali3597"} target="_blank">
+            <FaGithub size={40} color={"#795548"} />
+          </a>
         </li>
         <li>
-          <FaLinkedin size={40} color={"#795548"} />
+          <a
+            href={"https://www.linkedin.com/in/ali-saleh-483076236/"}
+            target="_blank"
+          >
+            <FaLinkedin size={40} color={"#795548"} />
+          </a>
         </li>
       </ul>{" "}
     </>

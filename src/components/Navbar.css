@@ -47,6 +47,10 @@
   cursor: pointer;
   margin-right: 3%;
 }
+.anchor ul > li > a {
+  display: block;
+  width: max-content;
+}
 .anchor ul :last-child {
   margin: 0;
 }
@@ -80,4 +84,14 @@
     display: flex;
     justify-content: center;
   }
+}
+
+.inputFile {
+  position: relative;
+}
+
+.inputFile > label {
+  position: absolute;
+  top: -80%;
+  left: 50%;
 }
