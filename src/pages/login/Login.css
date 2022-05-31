@@ -28,3 +28,22 @@
   align-items: center;
   justify-content: center;
 }
+
+.login button {
+  height: 6vh;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: #795548;
+  padding: 2%;
+  width: max-content;
+  font-weight: bold;
+  color: white;
+}
+.login button:hover {
+  transform: scale(1.04);
+}
+
+.error-login {
+  margin-top: 2%;
+  color: red;
+}

@@ -15,10 +15,10 @@ export function Login() {
 
   return (
     <div className="login">
-      <h2>Login</h2>
+      <h2>Connexion</h2>
       <form onSubmit={handleSubmit} className="login-form">
         <label>
-          <span>email:</span>
+          <span>Email :</span>
           <input
             required
             type="email"
@@ -27,7 +27,7 @@ export function Login() {
           />
         </label>
         <label>
-          <span>password:</span>
+          <span>Mot de passe :</span>
           <input
             required
             type="password"
@@ -35,8 +35,8 @@ export function Login() {
             value={password}
           />
         </label>
-        <button>log in</button>
-        {error && <p> {error} </p>}
+        <button>Connexion</button>
+        {error && <p className="error-login"> Identifiants invalides </p>}
       </form>
     </div>
   );
