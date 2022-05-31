@@ -13,16 +13,33 @@ export const ExperienceAdmin = ({ experience }) => {
   const [deleting, toggleDeleting] = useToggle(false);
   const [active, setActive] = useState(experience.active);
   const [attestation, setAttestation] = useState(experience.attestation);
-  const [report, setReport] = useState(experience.report);
-  const [company, setCompany] = useState(experience.company);
-  const [details, setDetails] = useState(experience.details);
-  const [start, setStart] = useState(experience.start);
-  const [end, setEnd] = useState(experience.end);
   const [changeAttestation, setChangeAttestation] = useState(null);
+  const [report, setReport] = useState(experience.report);
   const [changeReport, setChangeReport] = useState(null);
-  const [location, setLocation] = useState(experience.location);
-  const [project, setProject] = useState(experience.project);
-  const [projectLink, setProjectLink] = useState(experience.projectLink);
+  const [company, setCompany] = useState(
+    experience.company ? experience.company : ""
+  );
+  const [details, setDetails] = useState(
+    experience.details ? experience.details : ""
+  );
+  const [start, setStart] = useState(
+    experience.start
+      ? experience.start.toDate().toISOString().split("T")[0]
+      : ""
+  );
+  const [end, setEnd] = useState(
+    experience.end ? experience.end.toDate().toISOString().split("T")[0] : ""
+  );
+
+  const [location, setLocation] = useState(
+    experience.location ? experience.location : ""
+  );
+  const [project, setProject] = useState(
+    experience.project ? experience.project : ""
+  );
+  const [projectLink, setProjectLink] = useState(
+    experience.projectLink ? experience.projectLink : ""
+  );
   const [technos, setTechnos] = useState(experience.technos);
   const [newProject, setNewProject] = useState(true);
   const { addDocument, updateDocument, deleteDocument, response } =
@@ -46,15 +63,16 @@ export const ExperienceAdmin = ({ experience }) => {
     const newErrors = errorsVerification(verificationArray);
     setErrors(newErrors);
     if (newErrors.length == 0) {
-      console.log(detailsList);
+      console.log(active, "lactivation");
+      console.log(typeof active, "lactivation");
       if (newProject) {
         await addDocument({
           active,
           company,
           details,
           detailsList,
-          start,
-          end,
+          start: new Date(start),
+          end: new Date(end),
           location,
           project,
           projectLink,
@@ -66,8 +84,8 @@ export const ExperienceAdmin = ({ experience }) => {
           company,
           details,
           detailsList,
-          start,
-          end,
+          start: new Date(start),
+          end: new Date(end),
           location,
           project,
           projectLink,
@@ -136,7 +154,7 @@ export const ExperienceAdmin = ({ experience }) => {
       >
         Details
       </Field>
-      <DetailsList detailsList={detailsList} setDetailsList={setDetailsList} />
+      <ListIems items={detailsList} setItems={setDetailsList} />
       <Field
         name={"start"}
         type={"date"}
@@ -174,10 +192,11 @@ export const ExperienceAdmin = ({ experience }) => {
         Lien du projet
       </Field>
       <h4> les Technos </h4>
-      <Technos technos={technos} setTechnos={setTechnos} />
+      <ListIems items={technos} setItems={setTechnos} />
       {!newProject && (
         <>
           {" "}
+          {!report && <p>Rajoutez un raportrapport </p>}
           {report && <a href={report}>Lien du Rapport</a>}
           <InputFile
             link={"report/" + experience.id}
@@ -188,6 +207,7 @@ export const ExperienceAdmin = ({ experience }) => {
       {!newProject && (
         <>
           {" "}
+          {!attestation && <p>Rajoutez une attestation </p>}
           {attestation && <a href={attestation}>Lien de l'attestation</a>}
           <InputFile
             link={"attestation/" + experience.id}
@@ -227,33 +247,33 @@ export const ExperienceAdmin = ({ experience }) => {
   );
 };
 
-const Technos = ({ technos, setTechnos }) => {
-  const addTechno = () => {
-    if (technos) {
-      setTechnos((currentTechnos) => [...currentTechnos, ""]);
+const ListIems = ({ items, setItems }) => {
+  const addItem = () => {
+    if (items) {
+      setItems((currentItems) => [...currentItems, ""]);
     } else {
-      setTechnos([""]);
+      setItems([""]);
     }
   };
-  const handleRemoveTechno = (index) => {
-    setTechnos((currentTechnos) => [
-      ...currentTechnos.slice(0, index),
-      ...currentTechnos.slice(index + 1),
+  const handleRemoveItem = (index) => {
+    setItems((currentItems) => [
+      ...currentItems.slice(0, index),
+      ...currentItems.slice(index + 1),
     ]);
   };
   return (
     <>
-      {!technos && <p> aucune techno </p>}
-      {technos &&
-        technos.map((tec, index) => (
-          <div key={index}>
+      {!items && <p> aucune élement </p>}
+      {items &&
+        items.map((tec, index) => (
+          <div className="itemList" key={index}>
             <input
               value={tec}
               onChange={(e) => {
                 const value = e.target.value;
                 const indexFirst = index;
-                setTechnos((currentTechnos) =>
-                  currentTechnos.map((t, index) =>
+                setItems((currentItems) =>
+                  currentItems.map((t, index) =>
                     index == indexFirst ? value : t
                   )
                 );
@@ -263,12 +283,14 @@ const Technos = ({ technos, setTechnos }) => {
             <FaMinusCircle
               cursor={"pointer"}
               color={"red"}
-              onClick={() => handleRemoveTechno(index)}
+              onClick={() => handleRemoveItem(index)}
             />
           </div>
         ))}
-      <p>Ajoutez une techno </p>
-      <FaCheckCircle cursor={"pointer"} color={"green"} onClick={addTechno} />
+      <div className="itemList">
+        <p>Ajoutez un élement</p>
+        <FaCheckCircle cursor={"pointer"} color={"green"} onClick={addItem} />
+      </div>
     </>
   );
 };

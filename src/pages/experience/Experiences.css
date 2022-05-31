@@ -121,8 +121,15 @@
   display: flex;
   flex-direction: column;
   border: 1px solid;
+  align-items: center;
 }
-
+.admin-expe > input {
+  width: 90%;
+}
+.admin-expe > textarea {
+  width: 90%;
+  height: 12vh;
+}
 @media screen and (max-width: 950px) {
   .left-expe > h1 {
     font-size: 31px !important;
@@ -154,4 +161,21 @@
 
 .experience-left-links a {
   margin-right: 1%;
+}
+
+.itemList > input {
+  width: 50%;
+  margin-right: 2%;
+}
+
+.itemList {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin-top: 0.5%;
+}
+
+.itemList > p {
+  margin-right: 1%;
+  width: 200px;
 }

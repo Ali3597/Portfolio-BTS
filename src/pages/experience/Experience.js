@@ -4,6 +4,9 @@ import { Link } from "../../components/IconLink";
 import { HiOutlineDocumentSearch } from "react-icons/hi";
 
 export const Experience = ({ experience, index, allExperiences, theme }) => {
+  if (experience.start) {
+    console.log(experience.start, "ton start");
+  }
   return (
     <div key={index}>
       <div className="bord">

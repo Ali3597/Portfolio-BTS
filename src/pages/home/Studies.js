@@ -125,12 +125,19 @@ function StudyAdmin({ study }) {
     setErrors(newErrors);
     if (newErrors.length == 0) {
       if (newProject) {
-        await addDocument({ details, end, start, title, school, location });
+        await addDocument({
+          details,
+          end: new Date(end),
+          start: new Date(start),
+          title,
+          school,
+          location,
+        });
       } else {
         await updateDocument(study.id, {
           details,
-          end,
-          start,
+          end: new Date(end),
+          start: new Date(start),
           title,
           school,
           location,

@@ -8,9 +8,11 @@ import { Modal } from "../../components/Modal";
 import { errorsVerification, errorFor } from "../../utils/Verification";
 
 export function SkillAdmin({ skill, theme }) {
+  console.log(skill.title, "voila mes titre");
   const [deleting, toggleDeleting] = useToggle(false);
   const [errors, setErrors] = useState([]);
-  const [details, setDetails] = useState(skill.details ? skill.details : " ");
+  console.log(skill, "voila mon skil");
+  const [details, setDetails] = useState(skill.details ? skill.details : "");
   const [title, setTitle] = useState(skill.title ? skill.title : "");
   const [newProject, setNewProject] = useState(true);
   const { addDocument, updateDocument, deleteDocument, response } =
@@ -19,7 +21,7 @@ export function SkillAdmin({ skill, theme }) {
     setErrors([]);
     console.log("on verifie");
     const verificationArray = [
-      { field: "details", content: details, min: 5, exist: true },
+      { field: "details", content: details, min: 5 },
       { field: "title", content: title, min: 5, exist: true },
     ];
     const newErrors = errorsVerification(verificationArray);
