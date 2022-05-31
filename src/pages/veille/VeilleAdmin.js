@@ -16,7 +16,7 @@ export function VeilleAdmin({ veille, theme }) {
   const [changeProduct, setChangeProduct] = useState(null);
 
   const [newProject, setNewProject] = useState(true);
-  const [title, setTitle] = useState(veille.title);
+  const [title, setTitle] = useState(veille.title ? veille.title : "");
   const { addDocument, updateDocument, deleteDocument, response } =
     useFirestore("veilles");
   useEffect(() => {
@@ -76,7 +76,7 @@ export function VeilleAdmin({ veille, theme }) {
     }
   }, [changeProduct]);
   return (
-    <>
+    <div className="veille-admin">
       <Field
         name={"Title"}
         value={title}
@@ -88,6 +88,7 @@ export function VeilleAdmin({ veille, theme }) {
       {!newProject && (
         <>
           {" "}
+          {!doc && <p>Rajoutez le document de la veille</p>}
           {doc && <a href={doc}>Lien du document dela veille</a>}
           <InputFile
             link={"veilleDoc/" + veille.id}
@@ -98,6 +99,7 @@ export function VeilleAdmin({ veille, theme }) {
       {!newProject && (
         <>
           {" "}
+          {!product && <p>Rajoutez le produit dela veille</p>}
           {product && <a href={product}>Lien du produit dela veille</a>}
           <InputFile
             link={"veilleProduct/" + veille.id}
@@ -131,6 +133,6 @@ export function VeilleAdmin({ veille, theme }) {
           buttonMessage={"Supprimer"}
         />
       )}
-    </>
+    </div>
   );
 }
