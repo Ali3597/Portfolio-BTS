@@ -17,7 +17,7 @@ export function VeilleAdmin({ veille, theme }) {
 
   const [newProject, setNewProject] = useState(true);
   const [title, setTitle] = useState(veille.title ? veille.title : "");
-  const { addDocument, updateDocument, deleteDocument, response } =
+  const { addDocument, updateDocument, deleteDocument } =
     useFirestore("veilles");
   useEffect(() => {
     if (veille.id) {
@@ -27,13 +27,13 @@ export function VeilleAdmin({ veille, theme }) {
 
   const handleValid = async () => {
     setErrors([]);
-    console.log("on verifie");
+
     const verificationArray = [
       { field: "title", content: title, min: 5, exist: true },
     ];
     const newErrors = errorsVerification(verificationArray);
     setErrors(newErrors);
-    if (newErrors.length == 0) {
+    if (newErrors.length === 0) {
       if (newProject) {
         await addDocument({ doc, title, product });
       } else {

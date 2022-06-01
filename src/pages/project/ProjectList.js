@@ -5,7 +5,7 @@ import { FaLink } from "react-icons/fa";
 import { AiFillGithub } from "react-icons/ai";
 import projectDefault from "../../assets/project.png";
 import { HiOutlineDocumentSearch } from "react-icons/hi";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 
 export const ProjectList = React.memo(function ({
   project,

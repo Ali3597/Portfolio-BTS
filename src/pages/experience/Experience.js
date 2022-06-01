@@ -4,20 +4,17 @@ import { Link } from "../../components/IconLink";
 import { HiOutlineDocumentSearch } from "react-icons/hi";
 
 export const Experience = ({ experience, index, allExperiences, theme }) => {
-  if (experience.start) {
-    console.log(experience.start, "ton start");
-  }
   return (
     <div key={index}>
       <div className="bord">
-        <div className={index == 0 ? "trait" : " trait trait-bord"}>
+        <div className={index === 0 ? "trait" : " trait trait-bord"}>
           <div> </div>
           <div> </div>
         </div>
         <div className={experience.active ? "dot active" : "dot"}> </div>
         <div
           className={
-            index == allExperiences - 1 ? "trait" : " trait trait-bord"
+            index === allExperiences - 1 ? "trait" : " trait trait-bord"
           }
         >
           <div> </div>

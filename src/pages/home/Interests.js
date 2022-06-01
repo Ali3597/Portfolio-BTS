@@ -49,7 +49,7 @@ function InterestAdmin({ interest }) {
   const [newProject, setNewProject] = useState(true);
   const [errors, setErrors] = useState([]);
   const [deleting, toggleDeleting] = useToggle(false);
-  const { addDocument, updateDocument, deleteDocument, response } =
+  const { addDocument, updateDocument, deleteDocument } =
     useFirestore("interests");
 
   useEffect(() => {
@@ -60,13 +60,13 @@ function InterestAdmin({ interest }) {
 
   const handleValid = async () => {
     setErrors([]);
-    console.log("on verifie");
+
     const verificationArray = [
       { field: "title", content: title, min: 5, exist: true },
     ];
     const newErrors = errorsVerification(verificationArray);
     setErrors(newErrors);
-    if (newErrors.length == 0) {
+    if (newErrors.length === 0) {
       if (newProject) {
         await addDocument({ title });
       } else {

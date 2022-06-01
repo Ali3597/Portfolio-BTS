@@ -40,9 +40,6 @@ export function Project() {
       setAdminProjects([...projects, newProject]);
     }
   }, [projects]);
-  useEffect(() => {
-    console.log("ojkkk");
-  }, []);
 
   useEffect(() => {
     if (projects && !admin) {
@@ -75,11 +72,6 @@ export function Project() {
       setFilteredProjects(pass);
     }
   }, [currentFilter, projects, theme]);
-  useEffect(() => {
-    if (size) {
-      console.log(size, "ma belle size ");
-    }
-  }, [size]);
 
   return (
     <div

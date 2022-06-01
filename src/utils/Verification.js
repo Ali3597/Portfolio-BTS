@@ -20,7 +20,7 @@ const ExistVerification = (content) => {
 };
 
 export const errorFor = function (field, errors) {
-  const error = errors.find((e) => e.field == field);
+  const error = errors.find((e) => e.field === field);
   if (error) {
     return error.message;
   } else {

@@ -65,7 +65,7 @@ function Study({ educ, theme }) {
         <div className="up-li">
           {educ.title} {educ.details && <span>({educ.details})</span>}
         </div>
-        <p style={{ color: theme.date }} style={{ color: theme.date }}>
+        <p style={{ color: theme.date }}>
           {" "}
           {educ.start
             .toDate()
@@ -100,7 +100,7 @@ function StudyAdmin({ study }) {
     study.location ? study.location : ""
   );
   const [newProject, setNewProject] = useState(true);
-  const { addDocument, updateDocument, deleteDocument, response } =
+  const { addDocument, updateDocument, deleteDocument } =
     useFirestore("studies");
   const [deleting, toggleDeleting] = useToggle(false);
 
@@ -112,7 +112,7 @@ function StudyAdmin({ study }) {
 
   const handleValid = async () => {
     setErrors([]);
-    console.log("on verifie");
+
     const verificationArray = [
       { field: "details", content: details, min: 5, exist: true },
       { field: "start", content: start, exist: true },
@@ -123,7 +123,7 @@ function StudyAdmin({ study }) {
     const newErrors = errorsVerification(verificationArray);
 
     setErrors(newErrors);
-    if (newErrors.length == 0) {
+    if (newErrors.length === 0) {
       if (newProject) {
         await addDocument({
           details,

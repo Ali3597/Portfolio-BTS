@@ -50,7 +50,7 @@ function ParagraphAdmin({ para }) {
   const [errors, setErrors] = useState([]);
   const [newProject, setNewProject] = useState(true);
   const [deleting, toggleDeleting] = useToggle(false);
-  const { addDocument, updateDocument, deleteDocument, response } =
+  const { addDocument, updateDocument, deleteDocument } =
     useFirestore("homeParagraphes");
   useEffect(() => {
     if (para.id) {
@@ -60,13 +60,13 @@ function ParagraphAdmin({ para }) {
 
   const handleValid = async () => {
     setErrors([]);
-    console.log("on verifie");
+
     const verificationArray = [
       { field: "details", content: details, min: 50, exist: true },
     ];
     const newErrors = errorsVerification(verificationArray);
     setErrors(newErrors);
-    if (newErrors.length == 0) {
+    if (newErrors.length === 0) {
       if (newProject) {
         await addDocument({ details });
       } else {

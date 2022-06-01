@@ -5,10 +5,15 @@ export function Contact() {
   const {theme} = useThemeContext()
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
+  const [success,setSuccess] = useState(false)
   const [message, setMessage] = useState("")
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(name,email,message)
+    setSuccess(false)
+    setEmail('')
+    setName('')
+    setMessage('')
+    setSuccess(true)
   }
   return (
     <div style={{ backgroundColor: theme.backgroundEven }} id="contact" className="block">
@@ -17,9 +22,11 @@ export function Contact() {
       </div>
       <div className="contact-right right">
         <form onSubmit={handleSubmit}>
-          <input style={{ backgroundColor: theme.inputBackground }} value={name} onChange={(e) => setName(e.target.value)} required type="text" placeholder="Name" />
-          <input style={{ backgroundColor: theme.inputBackground }} value={email} onChange={(e) => setEmail(e.target.value)}  required type="email" placeholder="Email" />
-          <textarea style={{ backgroundColor: theme.inputBackground }} value={message} onChange={(e) => setMessage(e.target.value)}  required placeholder="Message" />
+          <input style={{color: theme.greyTitleColor, backgroundColor: theme.inputBackground }} value={name} onChange={(e) => setName(e.target.value)} required type="text" placeholder="Name" />
+          
+          <input style={{ color: theme.greyTitleColor, backgroundColor: theme.inputBackground }} value={email} onChange={(e) => setEmail(e.target.value)}  required type="email" placeholder="Email" />
+          <textarea style={{ color: theme.greyTitleColor, backgroundColor: theme.inputBackground }} value={message} onChange={(e) => setMessage(e.target.value)} required placeholder="Message" />
+          {success && <p className="success-contact"> Votre message a bien éte envoyé  </p>}
           <button>Envoyer</button>
         </form>
       </div>

@@ -67,7 +67,7 @@ export function Navbar({ user, toggleOpened }) {
                 offset={-80}
                 smooth={true}
               >
-                Projects
+                Projets
               </Link>
             </li>
 
@@ -77,6 +77,7 @@ export function Navbar({ user, toggleOpened }) {
                 to="contact"
                 offset={-80}
                 smooth={true}
+                spy={true}
               >
                 Contact
               </Link>

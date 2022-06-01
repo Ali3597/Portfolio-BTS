@@ -95,3 +95,8 @@
   top: -80%;
   left: 50%;
 }
+.inputFile > a {
+  text-decoration: none;
+  font-weight: 700;
+  color: black;
+}

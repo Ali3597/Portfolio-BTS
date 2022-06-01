@@ -1,6 +1,5 @@
 export function ProjectFilter({ currentFilter, changeFilter, filters, theme }) {
   const handleClick = (newFilter) => {
-    console.log(newFilter);
     changeFilter(newFilter);
   };
   return (

@@ -40,7 +40,7 @@ export function ProjectListAdmin({ project }) {
 
   const handleValid = async () => {
     setErrors([]);
-    console.log("on verifie");
+
     const verificationArray = [
       { field: "details", content: details, min: 5, exist: true },
 
@@ -49,7 +49,7 @@ export function ProjectListAdmin({ project }) {
     ];
     const newErrors = errorsVerification(verificationArray);
     setErrors(newErrors);
-    if (newErrors.length == 0) {
+    if (newErrors.length === 0) {
       if (newProject) {
         await addDocument({ details, githubLink, projectLink, title, type });
       } else {

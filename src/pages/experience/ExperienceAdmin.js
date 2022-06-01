@@ -53,7 +53,7 @@ export const ExperienceAdmin = ({ experience }) => {
 
   const handleValid = async () => {
     setErrors([]);
-    console.log("on verifie");
+
     const verificationArray = [
       { field: "company", content: company, min: 5, exist: true },
       { field: "details", content: details, min: 5, exist: true },
@@ -62,9 +62,7 @@ export const ExperienceAdmin = ({ experience }) => {
     ];
     const newErrors = errorsVerification(verificationArray);
     setErrors(newErrors);
-    if (newErrors.length == 0) {
-      console.log(active, "lactivation");
-      console.log(typeof active, "lactivation");
+    if (newErrors.length === 0) {
       if (newProject) {
         await addDocument({
           active,
@@ -274,7 +272,7 @@ const ListIems = ({ items, setItems }) => {
                 const indexFirst = index;
                 setItems((currentItems) =>
                   currentItems.map((t, index) =>
-                    index == indexFirst ? value : t
+                    index === indexFirst ? value : t
                   )
                 );
               }}
@@ -291,56 +289,6 @@ const ListIems = ({ items, setItems }) => {
         <p>Ajoutez un élement</p>
         <FaCheckCircle cursor={"pointer"} color={"green"} onClick={addItem} />
       </div>
-    </>
-  );
-};
-
-const DetailsList = ({ detailsList, setDetailsList }) => {
-  const addDetailsList = () => {
-    if (detailsList) {
-      setDetailsList((currentDetailsList) => [...currentDetailsList, ""]);
-    } else {
-      setDetailsList([""]);
-    }
-  };
-  const handleRemoveDetailList = (index) => {
-    setDetailsList((currentDetailsList) => [
-      ...currentDetailsList.slice(0, index),
-      ...currentDetailsList.slice(index + 1),
-    ]);
-  };
-  return (
-    <>
-      {!detailsList && <p> aucun details </p>}
-      {detailsList &&
-        detailsList.map((tec, index) => (
-          <div key={index}>
-            <input
-              value={tec}
-              onChange={(e) => {
-                const value = e.target.value;
-                const indexFirst = index;
-                setDetailsList((detailsList) =>
-                  detailsList.map((t, index) =>
-                    index == indexFirst ? value : t
-                  )
-                );
-              }}
-            />
-
-            <FaMinusCircle
-              cursor={"pointer"}
-              color={"red"}
-              onClick={() => handleRemoveDetailList(index)}
-            />
-          </div>
-        ))}
-      <p>Ajoutez un detail </p>
-      <FaCheckCircle
-        cursor={"pointer"}
-        color={"green"}
-        onClick={addDetailsList}
-      />
     </>
   );
 };
